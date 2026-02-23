@@ -40,7 +40,7 @@ export default function Navbar() {
         }
 
         /* Logo */
-        .nav-logo { display: flex; align-items: baseline; text-decoration: none; }
+        .nav-logo { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; gap: 0; line-height: 1; }
         .logo-cymak {
           font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 900;
           background: linear-gradient(135deg, #c084fc 0%, #e879f9 50%, #60a5fa 100%);
@@ -49,8 +49,8 @@ export default function Navbar() {
           animation: logoShimmer 5s linear infinite;
         }
         .logo-tech {
-          font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 500;
-          color: rgba(255,255,255,0.40); letter-spacing: 0.12em; text-transform: uppercase; margin-left: 7px;
+          font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 500;
+          color: rgba(255,255,255,0.38); letter-spacing: 0.18em; text-transform: uppercase; line-height: 1;
         }
         @keyframes logoShimmer {
           0%   { background-position: 0% center; }

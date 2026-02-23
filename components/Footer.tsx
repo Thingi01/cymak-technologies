@@ -13,7 +13,7 @@ export default function Footer() {
         .footer-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
         .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
 
-        .footer-logo { display: flex; align-items: baseline; text-decoration: none; margin-bottom: 1rem; }
+        .footer-logo { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; margin-bottom: 1rem; gap: 0; line-height: 1; }
         .f-logo-cymak {
           font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 900;
           background: linear-gradient(135deg, #c084fc 0%, #e879f9 50%, #60a5fa 100%);
@@ -23,8 +23,8 @@ export default function Footer() {
         }
         @keyframes fLogoShimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
         .f-logo-tech {
-          font-family: 'Outfit', sans-serif; font-size: 0.75rem; font-weight: 500;
-          color: rgba(255,255,255,0.35); letter-spacing: 0.12em; text-transform: uppercase; margin-left: 7px;
+          font-family: 'Outfit', sans-serif; font-size: 0.60rem; font-weight: 500;
+          color: rgba(255,255,255,0.35); letter-spacing: 0.18em; text-transform: uppercase; line-height: 1;
         }
         .footer-tagline {
           font-family: 'Outfit', sans-serif; font-size: 0.875rem; color: rgba(255,255,255,0.40);
