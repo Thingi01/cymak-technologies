@@ -25,10 +25,10 @@ function parseInline(text: string): React.ReactNode[] {
   let keyIdx = 0;
 
   while (remaining.length > 0) {
-    const boldMatch = remaining.match(/^(.*?)\*\*(.+?)\*\*/s);
-    const italicMatch = remaining.match(/^(.*?)\*(.+?)\*/s);
-    const codeMatch = remaining.match(/^(.*?)`(.+?)`/s);
-    const linkMatch = remaining.match(/^(.*?)\[([^\]]+)\]\(([^)]+)\)/s);
+    const boldMatch = remaining.match(/^(.*?)\*\*(.+?)\*\*/);
+    const italicMatch = remaining.match(/^(.*?)\*(.+?)\*/);
+    const codeMatch = remaining.match(/^(.*?)`(.+?)`/);
+    const linkMatch = remaining.match(/^(.*?)\[([^\]]+)\]\(([^)]+)\)/);
 
     const matches = [
       boldMatch && { type: "bold", match: boldMatch },
