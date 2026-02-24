@@ -36,8 +36,7 @@ const landingPages = [
   },
 ];
 
-// ✅ Rename your 4 design images to match these filenames exactly
-// Then place them inside: public/images/designs/
+
 const designSamples = [
   {
     num: "D1",
@@ -175,7 +174,7 @@ export default function Projects() {
             ))}
           </div>
 
-          <div className="cat-label">Graphic Design</div>
+          <div className="cat-label">Sample Graphic Design</div>
           <div className="design-grid">
             {designSamples.map(d => (
               <div key={d.num} className="design-card">
