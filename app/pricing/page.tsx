@@ -64,7 +64,7 @@ const webPlans = [
 const designPlans = [
   {
     name: "Basic",
-    price: "3,500",
+    price: "1,200",
     desc: "Quick turnaround for single design needs.",
     features: [
       "1 design (flyer, poster, or graphic)",
@@ -78,7 +78,7 @@ const designPlans = [
   },
   {
     name: "Standard",
-    price: "8,500",
+    price: "6,500",
     desc: "Best for social media campaigns and content creators.",
     features: [
       "Up to 5 designs",
@@ -93,7 +93,7 @@ const designPlans = [
   },
   {
     name: "Brand Pack",
-    price: "22,000",
+    price: "20,000",
     desc: "Complete visual identity package for businesses launching or rebranding.",
     features: [
       "Logo design (3 variations)",
@@ -146,7 +146,7 @@ const seoPlans = [
   },
   {
     name: "Authority",
-    price: "30,000",
+    price: "25,000",
     desc: "Aggressive SEO strategy for businesses targeting competitive keywords.",
     features: [
       "Everything in Growth",
