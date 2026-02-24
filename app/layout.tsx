@@ -1,9 +1,43 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
   title: "CYMAK Technologies",
-  description: "Secure, scalable, and future-ready digital solutions — Web Development, SEO, Graphic Design, and Systems Infrastructure.",
+  description:
+    "Secure, scalable, and enterprise-grade digital solutions — Web Development, SEO Optimization, Graphic Design, and IT Infrastructure.",
+  metadataBase: new URL("https://cymak-technologies.vercel.app"),
+  openGraph: {
+    title: "CYMAK Technologies",
+    description:
+      "Secure, scalable, and future-ready digital solutions for businesses across Kenya.",
+    url: "https://cymak-technologies.vercel.app",
+    siteName: "CYMAK Technologies",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "CYMAK Technologies",
+      },
+    ],
+    locale: "en_KE",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CYMAK Technologies",
+    description: "Secure, scalable, and future-ready digital solutions.",
+    images: ["/images/og-image.png"],
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png" }],
+  },
 };
 
 export default function RootLayout({
@@ -38,7 +72,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <WhatsAppButton />
+      </body>
     </html>
   );
 }

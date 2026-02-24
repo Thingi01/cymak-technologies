@@ -18,7 +18,8 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handler);
   }, []);
 
-  const links = ["Services", "About", "Projects", "Blog", "Contact"];
+  const links = ["Services", "About", "Projects", "Pricing", "Blog", "Contact"];
+  const pageLinks = ["About", "Pricing"];
 
   return (
     <>

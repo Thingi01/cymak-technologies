@@ -114,8 +114,9 @@ export default function Footer() {
             <div>
               <div className="footer-col-title">Company</div>
               <ul className="footer-links">
-                <li><a href="#about">About Us</a></li>
+                <li><a href="/about">About Us</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="/pricing">Pricing</a></li>
                 <li><a href="#blog">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
               </ul>
