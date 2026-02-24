@@ -19,7 +19,6 @@ export default function Navbar() {
   }, []);
 
   const links = ["Services", "About", "Projects", "Pricing", "Blog", "Contact"];
-  const pageLinks = ["About", "Pricing"];
 
   return (
     <>
@@ -181,13 +180,18 @@ export default function Navbar() {
       <nav className={`nav-root${scrolled ? " scrolled" : ""}`}>
         <div className="nav-inner">
           <a href="#" className="nav-logo">
-            <span className="logo-cymak">CYMAK</span>
-            <span className="logo-tech">Technologies</span>
+            <div className="logo-icon">
+              <span className="logo-icon-text">CK</span>
+            </div>
+            <div className="logo-text-wrap">
+              <span className="logo-cymak">CYMAK</span>
+              <span className="logo-tech">Technologies</span>
+            </div>
           </a>
 
           <ul className="nav-links">
             {links.map(l => (
-              <li key={l}><a href={`#${l.toLowerCase()}`}>{l}</a></li>
+              <li key={l}><a href={l === "Pricing" ? "/pricing" : `#${l.toLowerCase()}`}>{l}</a></li>
             ))}
           </ul>
 
@@ -211,7 +215,7 @@ export default function Navbar() {
         {links.map(l => (
           <a
             key={l}
-            href={`#${l.toLowerCase()}`}
+            href={l === "Pricing" ? "/pricing" : `#${l.toLowerCase()}`}
             className="m-link"
             onClick={() => setMenuOpen(false)}
           >
