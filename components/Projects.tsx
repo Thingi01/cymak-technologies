@@ -36,12 +36,33 @@ const landingPages = [
   },
 ];
 
-
+// ✅ Rename your 4 design images to match these filenames exactly
+// Then place them inside: public/images/designs/
 const designSamples = [
-  { num: "D1", label: "Retreat Designs",    img: "/images/designs/ack.png" },
-  { num: "D2", label: "Social Media Graphics",    img: "/images/designs/marketing.png" },
-  { num: "D3", label: "Poster & Flyer Design",    img: "/images/designs/mtlongonot.png" },
-  { num: "D4", label: "Digital Marketing Assets", img: "/images/designs/mushtech.png" },
+  {
+    num: "D1",
+    label: "Event Flyer",
+    desc: "Bold, eye-catching event flyer designed for maximum social media engagement and shareability.",
+    img: "/images/designs/design-1.jpg",
+  },
+  {
+    num: "D2",
+    label: "Promotional Poster",
+    desc: "High-impact promotional poster crafted to communicate offers clearly and drive audience action.",
+    img: "/images/designs/design-2.jpg",
+  },
+  {
+    num: "D3",
+    label: "Social Media Flyer",
+    desc: "Clean, branded social media flyer optimized for Instagram and Facebook with strong visual hierarchy.",
+    img: "/images/designs/design-3.jpg",
+  },
+  {
+    num: "D4",
+    label: "Digital Poster",
+    desc: "Professional digital poster designed to build brand presence and capture attention across platforms.",
+    img: "/images/designs/design-4.jpg",
+  },
 ];
 
 export default function Projects() {
@@ -91,17 +112,18 @@ export default function Projects() {
         .design-card:hover img { transform: scale(1.07); }
         .design-overlay {
           position: absolute; inset: 0;
-          background: linear-gradient(to top, rgba(9,9,26,0.95) 0%, rgba(9,9,26,0.20) 50%, transparent 100%);
-          opacity: 0; transition: opacity 0.35s;
+          background: linear-gradient(to top, rgba(9,9,26,0.98) 0%, rgba(9,9,26,0.60) 55%, transparent 100%);
+          opacity: 0.15; transition: opacity 0.35s;
         }
         .design-card:hover .design-overlay { opacity: 1; }
         .design-info {
           position: absolute; bottom: 0; left: 0; right: 0; padding: 1.2rem 1rem 1rem;
-          transform: translateY(8px); transition: transform 0.38s cubic-bezier(0.16,1,0.3,1);
+          transform: translateY(10px); transition: transform 0.38s cubic-bezier(0.16,1,0.3,1);
         }
         .design-card:hover .design-info { transform: translateY(0); }
         .design-info-num { font-family: 'Outfit', sans-serif; font-size: 0.60rem; font-weight: 700; color: rgba(232,121,249,0.75); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.25rem; }
-        .design-info-label { font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.92); line-height: 1.35; }
+        .design-info-label { font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.92); line-height: 1.35; margin-bottom: 0.3rem; }
+        .design-info-desc { font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 300; color: rgba(255,255,255,0.60); line-height: 1.5; }
 
         @media (max-width: 900px) {
           .proj-grid, .proj-grid-2 { grid-template-columns: 1fr; }
@@ -162,6 +184,7 @@ export default function Projects() {
                 <div className="design-info">
                   <div className="design-info-num">{d.num}</div>
                   <div className="design-info-label">{d.label}</div>
+                  <div className="design-info-desc">{d.desc}</div>
                 </div>
               </div>
             ))}
