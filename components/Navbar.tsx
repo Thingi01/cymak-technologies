@@ -180,13 +180,8 @@ export default function Navbar() {
       <nav className={`nav-root${scrolled ? " scrolled" : ""}`}>
         <div className="nav-inner">
           <a href="#" className="nav-logo">
-            <div className="logo-icon">
-              <span className="logo-icon-text">CK</span>
-            </div>
-            <div className="logo-text-wrap">
-              <span className="logo-cymak">CYMAK</span>
-              <span className="logo-tech">Technologies</span>
-            </div>
+            <span className="logo-cymak">CYMAK</span>
+            <span className="logo-tech">Technologies</span>
           </a>
 
           <ul className="nav-links">

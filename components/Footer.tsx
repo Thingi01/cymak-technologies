@@ -76,13 +76,8 @@ export default function Footer() {
             {/* Brand */}
             <div>
               <a href="#home" className="footer-logo">
-                <div className="f-logo-icon">
-                  <span className="f-logo-icon-text">CK</span>
-                </div>
-                <div className="f-logo-text-wrap">
-                  <span className="f-logo-cymak">CYMAK</span>
-                  <span className="f-logo-tech">Technologies</span>
-                </div>
+                <span className="f-logo-cymak">CYMAK</span>
+                <span className="f-logo-tech">Technologies</span>
               </a>
               <p className="footer-tagline">
                 Building secure, scalable, and future-ready digital foundations for businesses that demand excellence.
