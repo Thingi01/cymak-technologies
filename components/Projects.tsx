@@ -43,25 +43,25 @@ const designSamples = [
     num: "D1",
     label: "Event Flyer",
     desc: "Bold, eye-catching event flyer designed for maximum social media engagement and shareability.",
-    img: "/images/designs/design-1.jpg",
+    img: "/images/designs/mtlongonot.png",
   },
   {
     num: "D2",
     label: "Promotional Poster",
     desc: "High-impact promotional poster crafted to communicate offers clearly and drive audience action.",
-    img: "/images/designs/design-2.jpg",
+    img: "/images/designs/marketing.png",
   },
   {
     num: "D3",
     label: "Social Media Flyer",
     desc: "Clean, branded social media flyer optimized for Instagram and Facebook with strong visual hierarchy.",
-    img: "/images/designs/design-3.jpg",
+    img: "/images/designs/mushtech.png",
   },
   {
     num: "D4",
     label: "Digital Poster",
     desc: "Professional digital poster designed to build brand presence and capture attention across platforms.",
-    img: "/images/designs/design-4.jpg",
+    img: "/images/designs/ack.png",
   },
 ];
 
