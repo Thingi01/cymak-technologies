@@ -17,7 +17,7 @@ const webProjects = [
     num: "03", type: "Full Website", title: "Saferon Systems Limited",
     desc: "Corporate site for a 30+ year veteran in electronic security and IT solutions in Nairobi. Built to reflect institutional trust and extensive service offerings.",
     tech: ["HTML/CSS", "Responsive", "Multi-section", "Vercel"],
-    url: "https://saferon-systems-limited.vercel.app/", color: "#2563eb",
+    url: "https://saferon-systemsltd.vercel.app/", color: "#2563eb",
   },
 ];
 
