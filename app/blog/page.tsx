@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
-
+export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Blog — CYMAK Technologies",
   description: "Insights on web development, SEO, graphic design, and digital strategy from CYMAK Technologies.",

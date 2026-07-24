@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-
+export const dynamic = "force-dynamic";
 // Fallback content used only if the DB has no rows yet (e.g. fresh install
 // before running the seed script) so the site never renders an empty section.
 const fallbackWebProjects = [

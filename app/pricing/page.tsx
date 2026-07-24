@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Pricing — CYMAK Technologies",
   description:
@@ -358,7 +358,7 @@ export default function PricingPage() {
             <div className="pr-bottom-text">
               <div className="pr-bottom-title">Need a custom package?</div>
               <p className="pr-bottom-sub">
-                Every business is different. Get in touch and we'll build a package tailored exactly to your needs and budget.
+                Every business is different. Get in touch and we&apos;ll build a package tailored exactly to your needs and budget.
               </p>
             </div>
             <Link href="/#contact" className="pr-bottom-btn">

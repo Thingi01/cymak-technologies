@@ -30,21 +30,26 @@ function parseInline(text: string): React.ReactNode[] {
     const codeMatch = remaining.match(/^(.*?)`(.+?)`/);
     const linkMatch = remaining.match(/^(.*?)\[([^\]]+)\]\(([^)]+)\)/);
 
+    type InlineMatch = {
+      type: "bold" | "italic" | "code" | "link";
+      match: RegExpMatchArray;
+    };
+
     const matches = [
       boldMatch && { type: "bold", match: boldMatch },
       italicMatch && { type: "italic", match: italicMatch },
       codeMatch && { type: "code", match: codeMatch },
       linkMatch && { type: "link", match: linkMatch },
     ]
-      .filter(Boolean)
-      .sort((a: any, b: any) => a.match[1].length - b.match[1].length);
+      .filter((value): value is InlineMatch => Boolean(value))
+      .sort((a, b) => a.match[1].length - b.match[1].length);
 
     if (matches.length === 0) {
       result.push(<span key={keyIdx++}>{remaining}</span>);
       break;
     }
 
-    const first = matches[0] as any;
+    const first = matches[0]!;
     const { type, match } = first;
 
     if (match[1]) result.push(<span key={keyIdx++}>{match[1]}</span>);
@@ -218,7 +223,7 @@ export default async function BlogPost({
           <div className="post-cta">
             <div className="post-cta-title">Ready to Work Together?</div>
             <p className="post-cta-sub">
-              Let's discuss how CYMAK Technologies can help your business grow.
+              Let&apos;s discuss how CYMAK Technologies can help your business grow.
             </p>
             <Link href="/#contact" className="post-cta-btn">Get in Touch →</Link>
           </div>

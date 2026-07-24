@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "About Us — CYMAK Technologies",
   description:
@@ -258,7 +258,7 @@ export default function AboutPage() {
               <div className="ab-commit-card">
                 <div className="ab-commit-card-title">Ready to Partner With Us?</div>
                 <p className="ab-commit-card-sub">
-                  CYMAK Technologies stands ready to support organizations seeking dependable, enterprise-grade technology solutions. Let's navigate digital transformation together.
+                  CYMAK Technologies stands ready to support organizations seeking dependable, enterprise-grade technology solutions. Let&apos;s navigate digital transformation together.
                 </p>
                 <Link href="/#contact" className="ab-commit-btn">Start a Conversation →</Link>
               </div>
