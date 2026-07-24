@@ -52,10 +52,10 @@ const landingPages = [
 // still ship in the repo. Re-upload through /admin/projects if you'd rather
 // have them served from Vercel Blob instead.
 const designSamples = [
-  { title: "Event Flyer", description: "Bold, eye-catching event flyer designed for maximum social media engagement and shareability.", image: "/images/designs/mtlongonot.png" },
-  { title: "Promotional Poster", description: "High-impact promotional poster crafted to communicate offers clearly and drive audience action.", image: "/images/designs/marketing.png" },
-  { title: "Social Media Flyer", description: "Clean, branded social media flyer optimized for Instagram and Facebook with strong visual hierarchy.", image: "/images/designs/mushtech.png" },
-  { title: "Digital Poster", description: "Professional digital poster designed to build brand presence and capture attention across platforms.", image: "/images/designs/ack.png" },
+  { type: "Event Flyer", title: "Event Flyer", description: "Bold, eye-catching event flyer designed for maximum social media engagement and shareability.", image: "/images/designs/mtlongonot.png" },
+  { type: "Promotional Poster", title: "Promotional Poster", description: "High-impact promotional poster crafted to communicate offers clearly and drive audience action.", image: "/images/designs/marketing.png" },
+  { type: "Social Media Flyer", title: "Social Media Flyer", description: "Clean, branded social media flyer optimized for Instagram and Facebook with strong visual hierarchy.", image: "/images/designs/mushtech.png" },
+  { type: "Digital Poster", title: "Digital Poster", description: "Professional digital poster designed to build brand presence and capture attention across platforms.", image: "/images/designs/ack.png" },
 ];
 
 async function main() {
