@@ -1,0 +1,170 @@
+/* Scoped styling for the /admin dashboard. Loaded only by admin pages. */
+
+.adm-h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #12211b;
+  margin-bottom: 0.3rem;
+}
+.adm-sub {
+  font-family: "Outfit", sans-serif;
+  font-size: 0.88rem;
+  color: rgba(18, 33, 27, 0.5);
+  margin-bottom: 2rem;
+}
+.adm-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.adm-card {
+  background: #ffffff;
+  border: 1px solid rgba(18, 33, 27, 0.10);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.adm-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.adm-stat-num {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #146c43;
+}
+.adm-stat-label {
+  font-family: "Outfit", sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #96701f;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+.adm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.85rem;
+}
+.adm-table th {
+  text-align: left;
+  color: rgba(18, 33, 27, 0.45);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid rgba(18, 33, 27, 0.10);
+}
+.adm-table td {
+  padding: 0.75rem 0.8rem;
+  border-bottom: 1px solid rgba(18, 33, 27, 0.07);
+  color: rgba(18, 33, 27, 0.82);
+  vertical-align: middle;
+}
+.adm-table tr:hover td {
+  background: #f5f8f6;
+}
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  border: none;
+  background: #146c43;
+  color: #fff;
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.adm-btn:hover:not(:disabled) { background: #1d8a56; }
+.adm-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.adm-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(18, 33, 27, 0.18);
+  color: rgba(18, 33, 27, 0.7);
+}
+.adm-btn-outline:hover:not(:disabled) { background: #f5f8f6; border-color: rgba(20,108,67,0.35); color: #146c43; }
+.adm-btn-danger {
+  background: transparent;
+  border: 1px solid rgba(220, 38, 38, 0.30);
+  color: #dc2626;
+}
+.adm-btn-danger:hover:not(:disabled) { background: rgba(220,38,38,0.06); }
+.adm-btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.76rem;
+}
+.adm-badge {
+  display: inline-block;
+  padding: 0.22rem 0.6rem;
+  border-radius: 100px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  font-family: "Outfit", sans-serif;
+  letter-spacing: 0.03em;
+}
+.adm-badge-new { background: #e7f1ea; color: #146c43; border: 1px solid rgba(20,108,67,0.28); }
+.adm-badge-read { background: rgba(18,33,27,0.05); color: rgba(18,33,27,0.55); border: 1px solid rgba(18,33,27,0.12); }
+.adm-badge-replied { background: #eef4f0; color: #1d8a56; border: 1px solid rgba(29,138,86,0.28); }
+.adm-badge-archived { background: rgba(18,33,27,0.03); color: rgba(18,33,27,0.35); border: 1px solid rgba(18,33,27,0.08); }
+.adm-badge-published { background: #eef4f0; color: #1d8a56; border: 1px solid rgba(29,138,86,0.28); }
+.adm-badge-draft { background: #f6edd8; color: #96701f; border: 1px solid rgba(184,137,46,0.28); }
+
+.adm-field { margin-bottom: 1.1rem; }
+.adm-label {
+  display: block;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(20, 108, 67, 0.75);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.adm-input,
+.adm-select,
+.adm-textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(18, 33, 27, 0.16);
+  background: #ffffff;
+  color: #12211b;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.adm-input:focus, .adm-select:focus, .adm-textarea:focus {
+  border-color: rgba(20,108,67,0.55); box-shadow: 0 0 0 3px rgba(20,108,67,0.10);
+}
+.adm-textarea { min-height: 160px; resize: vertical; font-family: monospace; }
+.adm-checkbox-row { display: flex; align-items: center; gap: 0.6rem; font-family: "Outfit", sans-serif; font-size: 0.85rem; color: rgba(18,33,27,0.75); }
+.adm-error { color: #dc2626; font-family: "Outfit", sans-serif; font-size: 0.82rem; margin-bottom: 1rem; }
+.adm-empty { font-family: "Outfit", sans-serif; color: rgba(18,33,27,0.35); font-size: 0.88rem; padding: 2rem 0; text-align: center; }
+.adm-thumb { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; background: rgba(18,33,27,0.04); }
+.adm-tag-input-row { display: flex; gap: 0.5rem; margin-bottom: 0.6rem; }
+.adm-tag-chip {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  background: #e7f1ea; border: 1px solid rgba(20,108,67,0.25);
+  color: #146c43; font-family: "Outfit", sans-serif; font-size: 0.75rem;
+  padding: 0.25rem 0.6rem; border-radius: 100px; margin: 0.2rem 0.3rem 0.2rem 0;
+}
+.adm-tag-chip button { background: none; border: none; color: inherit; cursor: pointer; font-size: 0.8rem; line-height: 1; }

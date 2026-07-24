@@ -1,0 +1,91 @@
+// Prisma schema for CYMAK Technologies backend
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AdminRole {
+  ADMIN
+  EDITOR
+}
+
+model AdminUser {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         AdminRole @default(ADMIN)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  lastLoginAt  DateTime?
+
+  @@map("admin_users")
+}
+
+model BlogPost {
+  id         String    @id @default(cuid())
+  slug       String    @unique
+  title      String
+  excerpt    String
+  content    String // markdown/MDX body
+  category   String    @default("General")
+  readTime   String    @default("3 min read")
+  author     String    @default("CYMAK Technologies")
+  coverImage String?
+  published  Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@map("blog_posts")
+  @@index([published, publishedAt])
+}
+
+enum ProjectCategory {
+  WEBSITE
+  LANDING_PAGE
+  DESIGN
+}
+
+model Project {
+  id          String          @id @default(cuid())
+  category    ProjectCategory
+  type        String // e.g. "Full Website", "Landing Page", "Event Flyer"
+  title       String
+  description String          @default("")
+  tags        String[]        @default([]) // e.g. ["React", "Responsive"]
+  image       String? // Vercel Blob URL — required in practice for DESIGN items
+  link        String? // optional live URL — used by WEBSITE / LANDING_PAGE
+  order       Int             @default(0)
+  published   Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@map("projects")
+  @@index([published, category, order])
+}
+
+enum LeadStatus {
+  NEW
+  READ
+  REPLIED
+  ARCHIVED
+}
+
+model ContactSubmission {
+  id        String     @id @default(cuid())
+  name      String
+  email     String
+  service   String
+  message   String
+  status    LeadStatus @default(NEW)
+  createdAt DateTime   @default(now())
+
+  @@map("contact_submissions")
+  @@index([status, createdAt])
+}
