@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { prisma } from "@/lib/prisma";
+import HeroProjectStack from "@/components/HeroProjectStack";
 
 async function getLiveProjectCount(): Promise<number> {
   try {
@@ -15,7 +15,7 @@ async function getLiveProjectCount(): Promise<number> {
 interface FeaturedProject {
   id: string;
   title: string;
-  image: string | null;
+  image: string;
 }
 
 async function getFeaturedProjects(): Promise<FeaturedProject[]> {
@@ -23,10 +23,11 @@ async function getFeaturedProjects(): Promise<FeaturedProject[]> {
     const rows = await prisma.project.findMany({
       where: { published: true, image: { not: null } },
       orderBy: { order: "asc" },
-      take: 3,
+      take: 12,
       select: { id: true, title: true, image: true },
     });
-    return rows;
+    // image is guaranteed non-null by the where clause above.
+    return rows.map((r) => ({ id: r.id, title: r.title, image: r.image as string }));
   } catch {
     return [];
   }
@@ -100,6 +101,8 @@ export default async function Hero() {
         .stack-card-0 { transform: rotate(-6deg) translate(-14px, 6px); z-index: 3; }
         .stack-card-1 { transform: rotate(3deg) translate(10px, -8px); z-index: 2; }
         .stack-card-2 { transform: rotate(9deg) translate(28px, -18px); z-index: 1; opacity: 0.9; }
+        .stack-card.stack-fading { opacity: 0; transition: opacity 0.35s ease; }
+        .stack-card:not(.stack-fading) { transition: opacity 0.35s ease, transform 0.3s var(--ease-out, ease); }
         .stack-wrap:hover .stack-card-0 { transform: rotate(-3deg) translate(-18px, 2px); }
         .stack-wrap:hover .stack-card-1 { transform: rotate(1deg) translate(14px, -12px); }
         .stack-wrap:hover .stack-card-2 { transform: rotate(6deg) translate(34px, -24px); }
@@ -212,17 +215,7 @@ export default async function Hero() {
 
           <div className="hero-visual" data-reveal data-reveal-delay="2">
             {featuredProjects.length >= 2 ? (
-              <div className="stack-wrap">
-                {featuredProjects.slice(0, 3).map((p, i) => (
-                  <div key={p.id} className={`stack-card stack-card-${i}`}>
-                    <Image src={p.image!} alt={p.title} fill sizes="340px" style={{ objectFit: "cover" }} />
-                  </div>
-                ))}
-                <div className="stack-caption">
-                  <a href="#projects" className="stack-caption-link">See all our work →</a>
-                  <div className="stack-caption-sub">Based in Nairobi, Kenya</div>
-                </div>
-              </div>
+              <HeroProjectStack projects={featuredProjects} />
             ) : (
               <div className="trust-card">
                 <div className="trust-mark"><span>CYM</span></div>
