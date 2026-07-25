@@ -1,4 +1,19 @@
-export default function Hero() {
+import { prisma } from "@/lib/prisma";
+
+async function getLiveProjectCount(): Promise<number> {
+  try {
+    const count = await prisma.project.count({ where: { published: true } });
+    // Keep a sensible floor so the stat never looks worse than the
+    // original static claim if the DB is empty or briefly unreachable.
+    return count > 0 ? count : 5;
+  } catch {
+    return 5;
+  }
+}
+
+export default async function Hero() {
+  const liveProjectCount = await getLiveProjectCount();
+
   return (
     <>
       <style>{`
@@ -93,7 +108,7 @@ export default function Hero() {
 
       <section className="hero" id="home">
         <div className="hero-inner">
-          <div>
+          <div data-reveal>
             <div className="hero-badge"><div className="badge-dot" />Technology Solutions Partner</div>
             <h1 className="hero-h1">
               Build Digital Foundations<br />That <span className="accent">Drive Growth</span>
@@ -106,12 +121,12 @@ export default function Hero() {
               <a href="#contact" className="h-btn-secondary">Start a Project →</a>
             </div>
             <div className="hero-stats">
-              <div><div className="stat-num">5+</div><div className="stat-label">Live Projects</div></div>
+              <div><div className="stat-num">{liveProjectCount}+</div><div className="stat-label">Live Projects</div></div>
               <div><div className="stat-num">100%</div><div className="stat-label">Client Focus</div></div>
               <div><div className="stat-num">4</div><div className="stat-label">Core Services</div></div>
             </div>
           </div>
-          <div className="hero-visual">
+          <div className="hero-visual" data-reveal data-reveal-delay="2">
             <div className="trust-card">
               <div className="trust-mark"><span>CYM</span></div>
               <div className="trust-title">Why businesses work with us</div>

@@ -212,7 +212,7 @@ export default function About() {
       <section className="about-section" id="about">
         <div className="about-inner">
           <div className="about-top">
-            <div className="about-left">
+            <div className="about-left" data-reveal>
               <span className="about-tagline">Who We Are</span>
               <h2 className="about-heading">
                 We Build Digital<br />
@@ -222,7 +222,7 @@ export default function About() {
                 CYMAK Technologies is a modern technology solutions company committed to helping businesses build secure, scalable, and future-ready digital environments.
               </p>
               <p className="about-body">
-                We combine technical expertise, strategic thinking, and innovation to deliver solutions tailored to each client's unique business objectives. We don't just provide services — we become your long-term technology partner.
+                We combine technical expertise, strategic thinking, and innovation to deliver solutions tailored to each client&apos;s unique business objectives. We don&apos;t just provide services — we become your long-term technology partner.
               </p>
               <div className="about-vision-box">
                 <div className="vision-label">Our Vision</div>
@@ -232,7 +232,7 @@ export default function About() {
               </div>
             </div>
 
-            <div>
+            <div data-reveal data-reveal-delay="2">
               <span className="values-section-label">Core Values</span>
               <div className="values-grid">
                 {values.map(v => (
@@ -246,13 +246,13 @@ export default function About() {
           </div>
 
           <div className="about-approach">
-            <div className="approach-header">
+            <div className="approach-header" data-reveal>
               <span className="section-label" style={{display:"block", textAlign:"center", fontSize:"0.72rem", letterSpacing:"0.2em", textTransform:"uppercase", color:"#96701f", fontWeight:600, marginBottom:"0.75rem"}}>How We Work</span>
               <h3 className="section-title" style={{fontFamily:"'Playfair Display',serif", fontSize:"clamp(1.6rem,3vw,2.2rem)", fontWeight:900, color:"#12211b", letterSpacing:"-0.02em"}}>Our Structured Approach</h3>
             </div>
             <div className="approach-steps">
-              {approach.map(s => (
-                <div key={s.step} className="approach-step">
+              {approach.map((s, i) => (
+                <div key={s.step} className="approach-step" data-reveal data-reveal-delay={i + 1}>
                   <div className="step-num-wrap">
                     <div className="step-num">{s.step}</div>
                   </div>

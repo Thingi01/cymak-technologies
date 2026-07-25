@@ -66,7 +66,7 @@ export default async function Blog() {
 
       <section className="blog-section" id="blog">
         <div className="blog-inner">
-          <div className="blog-header">
+          <div className="blog-header" data-reveal>
             <div>
               <span className="b-label">Insights</span>
               <h2 className="b-title">From the Blog</h2>
@@ -78,8 +78,8 @@ export default async function Blog() {
             {posts.length === 0 ? (
               <div className="blog-empty">Blog posts coming soon — publish your first one from /admin/posts</div>
             ) : (
-              posts.map((post) => (
-                <Link key={post.slug} href={`/blog/${post.slug}`} className="blog-card">
+              posts.map((post, i) => (
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="blog-card" data-reveal data-reveal-delay={i + 1}>
                   <div className="bc-top">
                     <span className="bc-cat">{post.category}</span>
                     <span className="bc-date">

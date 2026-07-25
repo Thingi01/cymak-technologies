@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
-export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Blog — CYMAK Technologies",
   description: "Insights on web development, SEO, graphic design, and digital strategy from CYMAK Technologies.",
@@ -75,7 +75,7 @@ export default async function BlogPage() {
 
       <div className="blog-page">
         <div className="blog-page-inner">
-          <div className="bp-header">
+          <div className="bp-header" data-reveal>
             <span className="bp-label">Insights & Articles</span>
             <h1 className="bp-title">The CYMAK Blog</h1>
             <p className="bp-sub">Practical insights on web development, SEO, design, and digital strategy — written for business owners and decision makers.</p>
@@ -88,11 +88,13 @@ export default async function BlogPage() {
             </div>
           ) : (
             <div className="bp-grid">
-              {posts.map((post) => (
+              {posts.map((post, i) => (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
                   className="bp-card"
+                  data-reveal
+                  data-reveal-delay={Math.min(i + 1, 6)}
                   style={{ "--cc": categoryColors[post.category] || "#146c43" } as React.CSSProperties}
                 >
                   <div className="bp-card-top">

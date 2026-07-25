@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Pricing — CYMAK Technologies",
   description:
@@ -177,11 +177,13 @@ type Plan = {
 function PricingGrid({ plans, color }: { plans: Plan[]; color: string }) {
   return (
     <div className="pricing-grid">
-      {plans.map((plan) => (
+      {plans.map((plan, i) => (
         <div
           key={plan.name}
           className={`pricing-card${plan.highlight ? " pricing-card--highlight" : ""}`}
           style={{ "--pc": color } as React.CSSProperties}
+          data-reveal
+          data-reveal-delay={i + 1}
         >
           {plan.highlight && (
             <div className="pricing-badge">Most Popular</div>
@@ -314,18 +316,18 @@ export default function PricingPage() {
         <div className="pricing-inner">
 
           {/* Header */}
-          <span className="pr-label">Transparent Pricing</span>
-          <h1 className="pr-title">Simple, Clear Pricing</h1>
-          <p className="pr-sub">
+          <span className="pr-label" data-reveal>Transparent Pricing</span>
+          <h1 className="pr-title" data-reveal>Simple, Clear Pricing</h1>
+          <p className="pr-sub" data-reveal>
             No hidden fees, no surprises. Choose a plan that fits your needs or contact us for a custom quote.
           </p>
-          <p className="pr-note">
+          <p className="pr-note" data-reveal>
             All prices are in <span>Kenyan Shillings (KES)</span> and exclude VAT where applicable.
           </p>
 
           {/* Web Development */}
           <div className="pr-section">
-            <div className="pr-section-header">
+            <div className="pr-section-header" data-reveal>
               <span className="pr-section-icon">⬡</span>
               <h2 className="pr-section-title">Web Development</h2>
               <div className="pr-section-line" />
@@ -335,7 +337,7 @@ export default function PricingPage() {
 
           {/* Graphic Design */}
           <div className="pr-section">
-            <div className="pr-section-header">
+            <div className="pr-section-header" data-reveal>
               <span className="pr-section-icon">◈</span>
               <h2 className="pr-section-title">Graphic Design</h2>
               <div className="pr-section-line" />
@@ -345,7 +347,7 @@ export default function PricingPage() {
 
           {/* SEO */}
           <div className="pr-section">
-            <div className="pr-section-header">
+            <div className="pr-section-header" data-reveal>
               <span className="pr-section-icon">✦</span>
               <h2 className="pr-section-title">SEO Optimization</h2>
               <div className="pr-section-line" />
@@ -354,7 +356,7 @@ export default function PricingPage() {
           </div>
 
           {/* Bottom CTA */}
-          <div className="pr-bottom">
+          <div className="pr-bottom" data-reveal>
             <div className="pr-bottom-text">
               <div className="pr-bottom-title">Need a custom package?</div>
               <p className="pr-bottom-sub">

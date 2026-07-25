@@ -78,7 +78,7 @@ export default function Contact() {
           width: 100%; padding: 0.8rem 1rem; border-radius: 8px;
           border: 1px solid rgba(18,33,27,0.16); background: #ffffff;
           color: #12211b; font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 400;
-          outline: none; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none;
+          outline: none; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none;
         }
         .cf-input::placeholder, .cf-textarea::placeholder { color: rgba(18,33,27,0.30); }
         .cf-input:focus, .cf-select:focus, .cf-textarea:focus {
@@ -135,7 +135,7 @@ export default function Contact() {
             <div className="popup-title">Message Sent!</div>
             <p className="popup-sub">
               Thank you for reaching out to CYMAK Technologies.<br />
-              We'll get back to you within <strong>24 hours</strong>.
+              We&apos;ll get back to you within <strong>24 hours</strong>.
             </p>
             <button className="popup-close" onClick={() => setPopup(false)}>
               Perfect, thank you!
@@ -148,10 +148,10 @@ export default function Contact() {
       <section className="contact-section" id="contact">
         <div className="contact-inner">
           {/* Left info */}
-          <div>
+          <div data-reveal>
             <span className="c-label">Get In Touch</span>
-            <h2 className="c-title">Let's Build Something Great</h2>
-            <p className="c-subtitle">Ready to transform your digital presence? Reach out and let's discuss how CYMAK Technologies can help your business grow.</p>
+            <h2 className="c-title">Let&apos;s Build Something Great</h2>
+            <p className="c-subtitle">Ready to transform your digital presence? Reach out and let&apos;s discuss how CYMAK Technologies can help your business grow.</p>
 
             <div className="c-info-cards">
               <div className="c-info-card">
@@ -193,9 +193,9 @@ export default function Contact() {
           </div>
 
           {/* Form */}
-          <div className="c-form-wrap">
+          <div className="c-form-wrap" data-reveal data-reveal-delay="2">
             <div className="cf-title">Start a Project</div>
-            <div className="cf-sub">Fill in your details and we'll be in touch shortly.</div>
+            <div className="cf-sub">Fill in your details and we&apos;ll be in touch shortly.</div>
             <form onSubmit={handleSubmit}>
               <div className="cf-row">
                 <div className="cf-group">

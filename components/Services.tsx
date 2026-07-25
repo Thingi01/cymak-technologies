@@ -133,13 +133,19 @@ export default function Services() {
 
       <section className="services-section" id="services">
         <div className="services-inner">
-          <span className="s-label">What We Do</span>
-          <h2 className="s-title">Integrated Technology Solutions</h2>
-          <p className="s-sub">Everything your business needs to build, grow, and succeed — delivered under one roof.</p>
+          <span className="s-label" data-reveal>What We Do</span>
+          <h2 className="s-title" data-reveal>Integrated Technology Solutions</h2>
+          <p className="s-sub" data-reveal>Everything your business needs to build, grow, and succeed — delivered under one roof.</p>
 
           <div className="services-grid">
-            {activeServices.map(s => (
-              <div key={s.title} className="service-card" style={{ "--sc": s.color } as React.CSSProperties}>
+            {activeServices.map((s, i) => (
+              <div
+                key={s.title}
+                className="service-card"
+                style={{ "--sc": s.color } as React.CSSProperties}
+                data-reveal
+                data-reveal-delay={Math.min(i + 1, 6)}
+              >
                 <span className="sc-icon">{s.icon}</span>
                 <div className="sc-title">{s.title}</div>
                 <p className="sc-desc">{s.desc}</p>
@@ -151,13 +157,19 @@ export default function Services() {
 
           {/* Future Services */}
           <div className="future-wrap">
-            <div className="future-header">
+            <div className="future-header" data-reveal>
               <span className="future-badge">⏳ Expanding Soon</span>
               <div className="future-title">Future Service Offerings</div>
             </div>
             <div className="future-grid">
-              {futureServices.map(s => (
-                <div key={s.title} className="future-card" style={{ "--fc": s.color } as React.CSSProperties}>
+              {futureServices.map((s, i) => (
+                <div
+                  key={s.title}
+                  className="future-card"
+                  style={{ "--fc": s.color } as React.CSSProperties}
+                  data-reveal
+                  data-reveal-delay={i + 1}
+                >
                   <span className="future-icon">{s.icon}</span>
                   <div>
                     <div className="future-card-title">{s.title}</div>

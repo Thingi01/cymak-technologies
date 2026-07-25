@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import ScrollReveal from "@/components/ScrollReveal";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "CYMAK Technologies",
@@ -48,33 +50,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Fonts */}
+        {/*
+          eslint-disable-next-line @next/next/no-page-custom-font --
+          This rule targets the legacy Pages Router's pages/_document.js;
+          in the App Router, the root layout's <head> is the correct and
+          recommended place for global font links, so this warning is a
+          known false positive here.
+        */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
-
-        {/* Google Analytics */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-W4C35EZ61P"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-W4C35EZ61P');
-            `,
-          }}
-        />
       </head>
       <body>
         {children}
         <WhatsAppButton />
+        <ScrollReveal />
+        <GoogleAnalytics gaId="G-W4C35EZ61P" />
       </body>
     </html>
   );

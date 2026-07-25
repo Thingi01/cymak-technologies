@@ -163,7 +163,7 @@ export default async function Projects() {
 
       <section className="projects-section" id="projects">
         <div className="projects-inner">
-          <div className="p-header">
+          <div className="p-header" data-reveal>
             <div>
               <span className="p-label">Our Work</span>
               <h2 className="p-title">Live Projects</h2>
@@ -173,10 +173,10 @@ export default async function Projects() {
             </a>
           </div>
 
-          <div className="cat-label">Websites</div>
+          <div className="cat-label" data-reveal>Websites</div>
           <div className="proj-grid">
             {webProjects.map((p, i) => (
-              <div key={p.id} className="proj-card">
+              <div key={p.id} className="proj-card" data-reveal data-reveal-delay={Math.min(i + 1, 6)}>
                 {p.image && (
                   <div className="proj-thumb">
                     <img src={p.image} alt={p.title} />
@@ -192,10 +192,10 @@ export default async function Projects() {
             ))}
           </div>
 
-          <div className="cat-label">Landing Pages</div>
+          <div className="cat-label" data-reveal>Landing Pages</div>
           <div className="proj-grid proj-grid-2">
             {landingPages.map((p, i) => (
-              <div key={p.id} className="proj-card">
+              <div key={p.id} className="proj-card" data-reveal data-reveal-delay={Math.min(i + 1, 6)}>
                 {p.image && (
                   <div className="proj-thumb">
                     <img src={p.image} alt={p.title} />
@@ -211,10 +211,10 @@ export default async function Projects() {
             ))}
           </div>
 
-          <div className="cat-label">Sample Graphic Design</div>
+          <div className="cat-label" data-reveal>Sample Graphic Design</div>
           <div className="design-grid">
             {designSamples.map((d, i) => (
-              <div key={d.id} className="design-card">
+              <div key={d.id} className="design-card" data-reveal data-reveal-delay={Math.min(i + 1, 6)}>
                 {d.image ? (
                   <img src={d.image} alt={d.title} />
                 ) : (

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "About Us — CYMAK Technologies",
   description:
@@ -170,7 +170,7 @@ export default function AboutPage() {
 
           {/* Hero */}
           <div className="ab-hero">
-            <div>
+            <div data-reveal>
               <span className="ab-label">Who We Are</span>
               <h1 className="ab-title">
                 Built on <span>Trust</span>,<br />Driven by Technology
@@ -183,7 +183,7 @@ export default function AboutPage() {
               </p>
               <Link href="/#contact" className="ab-cta">Work With Us →</Link>
             </div>
-            <div className="ab-hero-right">
+            <div className="ab-hero-right" data-reveal data-reveal-delay="2">
               <div className="ab-mv-card">
                 <span className="ab-mv-tag">Our Mission</span>
                 <p className="ab-mv-text">
@@ -201,13 +201,13 @@ export default function AboutPage() {
 
           {/* Core Services */}
           <div className="ab-section">
-            <div className="ab-section-header">
+            <div className="ab-section-header" data-reveal>
               <h2 className="ab-section-title">Our Core Services</h2>
               <div className="ab-section-line" />
             </div>
             <div className="ab-services-grid">
-              {services.map((s) => (
-                <div key={s.title} className="ab-service-card" style={{ "--sc": s.color } as React.CSSProperties}>
+              {services.map((s, i) => (
+                <div key={s.title} className="ab-service-card" style={{ "--sc": s.color } as React.CSSProperties} data-reveal data-reveal-delay={Math.min(i + 1, 6)}>
                   <span className="ab-service-icon">{s.icon}</span>
                   <div className="ab-service-title">{s.title}</div>
                   <p className="ab-service-desc">{s.desc}</p>
@@ -218,13 +218,13 @@ export default function AboutPage() {
 
           {/* Methodology */}
           <div className="ab-section">
-            <div className="ab-section-header">
+            <div className="ab-section-header" data-reveal>
               <h2 className="ab-section-title">Our Approach</h2>
               <div className="ab-section-line" />
             </div>
             <div className="ab-method-grid">
-              {methodology.map((m) => (
-                <div key={m.num} className="ab-method-card">
+              {methodology.map((m, i) => (
+                <div key={m.num} className="ab-method-card" data-reveal data-reveal-delay={i + 1}>
                   <div className="ab-method-num">{m.num}</div>
                   <div>
                     <div className="ab-method-title">{m.title}</div>
@@ -237,12 +237,12 @@ export default function AboutPage() {
 
           {/* Commitment */}
           <div className="ab-section">
-            <div className="ab-section-header">
+            <div className="ab-section-header" data-reveal>
               <h2 className="ab-section-title">Our Commitment</h2>
               <div className="ab-section-line" />
             </div>
             <div className="ab-commit-wrap">
-              <div>
+              <div data-reveal>
                 <p className="ab-commit-text">
                   At CYMAK Technologies, we prioritize delivering solutions that are not only technically sound but strategically valuable. Our focus is on long-term partnerships, not one-time engagements.
                 </p>
@@ -255,7 +255,7 @@ export default function AboutPage() {
                   ))}
                 </div>
               </div>
-              <div className="ab-commit-card">
+              <div className="ab-commit-card" data-reveal data-reveal-delay="2">
                 <div className="ab-commit-card-title">Ready to Partner With Us?</div>
                 <p className="ab-commit-card-sub">
                   CYMAK Technologies stands ready to support organizations seeking dependable, enterprise-grade technology solutions. Let&apos;s navigate digital transformation together.
