@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-export const dynamic = "force-dynamic";
+
 // Fallback content used only if the DB has no rows yet (e.g. fresh install
 // before running the seed script) so the site never renders an empty section.
 const fallbackWebProjects = [
@@ -7,19 +7,19 @@ const fallbackWebProjects = [
     id: "fallback-01", type: "Full Website", title: "Mush Tech Solution",
     description: "Corporate website for a Nairobi-based advanced security & IT services company. Features service listings, product gallery, WhatsApp CTA, and contact integration.",
     tags: ["HTML/CSS", "JavaScript", "Responsive", "WhatsApp API"],
-    link: "https://mushtechsolution-website.vercel.app/",
+    link: "https://mushtechsolution-website.vercel.app/", image: null,
   },
   {
     id: "fallback-02", type: "Portfolio Website", title: "Cyrus Maina — Developer Portfolio",
     description: "Personal portfolio site showcasing development skills, projects, and professional profile. Clean, modern design built for career growth.",
     tags: ["React", "JavaScript", "Responsive", "Vercel"],
-    link: "https://my-portifolio-cyrus.vercel.app/",
+    link: "https://my-portifolio-cyrus.vercel.app/", image: null,
   },
   {
     id: "fallback-03", type: "Full Website", title: "Saferon Systems Limited",
     description: "Corporate site for a 30+ year veteran in electronic security and IT solutions in Nairobi. Built to reflect institutional trust and extensive service offerings.",
     tags: ["HTML/CSS", "Responsive", "Multi-section", "Vercel"],
-    link: "https://saferon-systemsltd.vercel.app/",
+    link: "https://saferon-systemsltd.vercel.app/", image: null,
   },
 ];
 
@@ -28,13 +28,13 @@ const fallbackLandingPages = [
     id: "fallback-04", type: "Landing Page", title: "LUXURE — Black November Drop",
     description: "High-converting luxury fashion landing page with countdown timer, product showcase, and flash sale mechanics for a limited drop campaign.",
     tags: ["HTML/CSS/JS", "Countdown Timer", "E-commerce UX", "Conversion Optimized"],
-    link: "https://luxury-landing-page-teal.vercel.app/",
+    link: "https://luxury-landing-page-teal.vercel.app/", image: null,
   },
   {
     id: "fallback-05", type: "Landing Page", title: "TechDeals — Dell XPS 13 Product Page",
     description: "Single-product sales landing page for the Dell XPS 13 9380. Clean spec breakdown, trust signals, and direct purchase CTA optimized for conversions.",
     tags: ["HTML/CSS/JS", "Product Page", "Sales Focused", "Mobile-Ready"],
-    link: "https://tech-deals-alpha.vercel.app/",
+    link: "https://tech-deals-alpha.vercel.app/", image: null,
   },
 ];
 
@@ -107,6 +107,8 @@ export default async function Projects() {
         .proj-grid-2 { grid-template-columns: repeat(2, 1fr); }
         .proj-card { padding: 2.5rem; background: #ffffff; position: relative; overflow: hidden; transition: background 0.25s; display: flex; flex-direction: column; }
         .proj-card:hover { background: #fbfdfc; }
+        .proj-thumb { border-radius: 10px; overflow: hidden; margin-bottom: 1.4rem; aspect-ratio: 16/10; background: #f5f8f6; border: 1px solid rgba(18,33,27,0.08); }
+        .proj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .proj-num { font-family: 'Playfair Display', serif; font-size: 3.8rem; font-weight: 900; color: rgba(20,108,67,0.06); position: absolute; top: 1.2rem; right: 1.5rem; line-height: 1; transition: color 0.3s; }
         .proj-card:hover .proj-num { color: rgba(20,108,67,0.10); }
         .proj-type { font-family: 'Outfit', sans-serif; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: #146c43; font-weight: 600; margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
@@ -175,6 +177,11 @@ export default async function Projects() {
           <div className="proj-grid">
             {webProjects.map((p, i) => (
               <div key={p.id} className="proj-card">
+                {p.image && (
+                  <div className="proj-thumb">
+                    <img src={p.image} alt={p.title} />
+                  </div>
+                )}
                 <div className="proj-num">{String(i + 1).padStart(2, "0")}</div>
                 <div className="proj-type">{p.type}</div>
                 <div className="proj-title">{p.title}</div>
@@ -189,6 +196,11 @@ export default async function Projects() {
           <div className="proj-grid proj-grid-2">
             {landingPages.map((p, i) => (
               <div key={p.id} className="proj-card">
+                {p.image && (
+                  <div className="proj-thumb">
+                    <img src={p.image} alt={p.title} />
+                  </div>
+                )}
                 <div className="proj-num">{String(webProjects.length + i + 1).padStart(2, "0")}</div>
                 <div className="proj-type">{p.type}</div>
                 <div className="proj-title">{p.title}</div>
