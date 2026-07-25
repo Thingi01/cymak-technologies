@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 
 async function getLiveProjectCount(): Promise<number> {
@@ -11,15 +12,38 @@ async function getLiveProjectCount(): Promise<number> {
   }
 }
 
+interface FeaturedProject {
+  id: string;
+  title: string;
+  image: string | null;
+}
+
+async function getFeaturedProjects(): Promise<FeaturedProject[]> {
+  try {
+    const rows = await prisma.project.findMany({
+      where: { published: true, image: { not: null } },
+      orderBy: { order: "asc" },
+      take: 3,
+      select: { id: true, title: true, image: true },
+    });
+    return rows;
+  } catch {
+    return [];
+  }
+}
+
 export default async function Hero() {
-  const liveProjectCount = await getLiveProjectCount();
+  const [liveProjectCount, featuredProjects] = await Promise.all([
+    getLiveProjectCount(),
+    getFeaturedProjects(),
+  ]);
 
   return (
     <>
       <style>{`
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: #ffffff; }
         .hero-inner {
-          position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 8rem 2rem 4rem;
+          position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 8rem 2rem 5rem;
           display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;
         }
         .hero-badge {
@@ -64,8 +88,38 @@ export default async function Hero() {
         }
         .stat-label { font-family: 'Outfit', sans-serif; font-size: 0.72rem; color: rgba(18,33,27,0.45); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem; }
 
-        /* Trust panel — replaces the old glowing orb with real content */
+        /* Featured-work stack — real client screenshots, fanned like a deck */
         .hero-visual { display: flex; align-items: center; justify-content: center; }
+        .stack-wrap { position: relative; width: 100%; max-width: 340px; height: 340px; }
+        .stack-card {
+          position: absolute; inset: 0; border-radius: 14px; overflow: hidden;
+          background: #f5f8f6; border: 1px solid rgba(18,33,27,0.10);
+          box-shadow: 0 16px 40px rgba(18,33,27,0.10);
+          transition: transform 0.3s var(--ease-out, ease);
+        }
+        .stack-card-0 { transform: rotate(-6deg) translate(-14px, 6px); z-index: 3; }
+        .stack-card-1 { transform: rotate(3deg) translate(10px, -8px); z-index: 2; }
+        .stack-card-2 { transform: rotate(9deg) translate(28px, -18px); z-index: 1; opacity: 0.9; }
+        .stack-wrap:hover .stack-card-0 { transform: rotate(-3deg) translate(-18px, 2px); }
+        .stack-wrap:hover .stack-card-1 { transform: rotate(1deg) translate(14px, -12px); }
+        .stack-wrap:hover .stack-card-2 { transform: rotate(6deg) translate(34px, -24px); }
+        .stack-caption {
+          position: absolute; left: 50%; bottom: -3.2rem; transform: translateX(-50%);
+          width: max-content; max-width: 280px; text-align: center;
+        }
+        .stack-caption-link {
+          display: inline-flex; align-items: center; gap: 0.4rem;
+          font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 600;
+          color: #146c43; text-decoration: none; border-bottom: 1px solid rgba(20,108,67,0.30);
+          padding-bottom: 2px; transition: border-color 0.2s;
+        }
+        .stack-caption-link:hover { border-color: #146c43; }
+        .stack-caption-sub {
+          margin-top: 0.4rem; font-family: 'Outfit', sans-serif; font-size: 0.74rem;
+          color: #96701f; font-weight: 600; letter-spacing: 0.03em;
+        }
+
+        /* Fallback trust panel if no project images exist yet */
         .trust-card {
           width: 100%; max-width: 360px; background: #ffffff; border: 1px solid rgba(18,33,27,0.10);
           border-radius: 16px; padding: 2.25rem; box-shadow: 0 12px 32px rgba(18,33,27,0.06);
@@ -97,12 +151,41 @@ export default async function Hero() {
           letter-spacing: 0.04em;
         }
 
+        /* Scroll cue */
+        .scroll-cue {
+          position: absolute; bottom: 1.75rem; left: 50%; transform: translateX(-50%);
+          display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+          text-decoration: none; z-index: 2;
+        }
+        .scroll-cue-label {
+          font-family: 'Outfit', sans-serif; font-size: 0.68rem; font-weight: 500;
+          letter-spacing: 0.14em; text-transform: uppercase; color: rgba(18,33,27,0.38);
+        }
+        .scroll-cue-arrow {
+          width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(18,33,27,0.16);
+          display: flex; align-items: center; justify-content: center;
+          color: rgba(18,33,27,0.4); font-size: 0.75rem;
+          animation: scrollBounce 2s ease-in-out infinite;
+        }
+        @keyframes scrollBounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(5px); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .scroll-cue-arrow { animation: none; }
+        }
+
         @media (max-width: 900px) {
-          .hero-inner { grid-template-columns: 1fr; text-align: center; }
+          .hero-inner { grid-template-columns: 1fr; text-align: center; padding-bottom: 6rem; }
           .hero-sub { margin: 0 auto 2.5rem; }
           .hero-actions { justify-content: center; }
           .hero-stats { justify-content: center; }
           .trust-card { text-align: left; }
+          .stack-wrap { margin-top: 2.5rem; }
+          .stack-caption { bottom: -3rem; }
+        }
+        @media (max-width: 480px) {
+          .scroll-cue { display: none; }
         }
       `}</style>
 
@@ -122,23 +205,43 @@ export default async function Hero() {
             </div>
             <div className="hero-stats">
               <div><div className="stat-num">{liveProjectCount}+</div><div className="stat-label">Live Projects</div></div>
-              <div><div className="stat-num">100%</div><div className="stat-label">Client Focus</div></div>
+              <div><div className="stat-num">24hr</div><div className="stat-label">Response Time</div></div>
               <div><div className="stat-num">4</div><div className="stat-label">Core Services</div></div>
             </div>
           </div>
+
           <div className="hero-visual" data-reveal data-reveal-delay="2">
-            <div className="trust-card">
-              <div className="trust-mark"><span>CYM</span></div>
-              <div className="trust-title">Why businesses work with us</div>
-              <ul className="trust-list">
-                <li><span className="trust-check">✓</span>Secure, production-ready builds from day one</li>
-                <li><span className="trust-check">✓</span>SEO-optimized for Kenyan and East African search</li>
-                <li><span className="trust-check">✓</span>Direct support — no ticketing queues or call centers</li>
-              </ul>
-              <div className="trust-foot">Based in Nairobi, Kenya</div>
-            </div>
+            {featuredProjects.length >= 2 ? (
+              <div className="stack-wrap">
+                {featuredProjects.slice(0, 3).map((p, i) => (
+                  <div key={p.id} className={`stack-card stack-card-${i}`}>
+                    <Image src={p.image!} alt={p.title} fill sizes="340px" style={{ objectFit: "cover" }} />
+                  </div>
+                ))}
+                <div className="stack-caption">
+                  <a href="#projects" className="stack-caption-link">See all our work →</a>
+                  <div className="stack-caption-sub">Based in Nairobi, Kenya</div>
+                </div>
+              </div>
+            ) : (
+              <div className="trust-card">
+                <div className="trust-mark"><span>CYM</span></div>
+                <div className="trust-title">Why businesses work with us</div>
+                <ul className="trust-list">
+                  <li><span className="trust-check">✓</span>Secure, production-ready builds from day one</li>
+                  <li><span className="trust-check">✓</span>SEO-optimized for Kenyan and East African search</li>
+                  <li><span className="trust-check">✓</span>Direct support — no ticketing queues or call centers</li>
+                </ul>
+                <div className="trust-foot">Based in Nairobi, Kenya</div>
+              </div>
+            )}
           </div>
         </div>
+
+        <a href="#services" className="scroll-cue">
+          <span className="scroll-cue-label">Scroll</span>
+          <span className="scroll-cue-arrow">↓</span>
+        </a>
       </section>
     </>
   );
