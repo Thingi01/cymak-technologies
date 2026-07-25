@@ -3,6 +3,10 @@ import { prisma } from "@/lib/prisma";
 
 const BASE_URL = "https://cymak-technologies.vercel.app";
 
+// Without this, the sitemap would be frozen at build-time content and
+// never reflect posts published/deleted afterward via /admin.
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },

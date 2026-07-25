@@ -6,6 +6,12 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Footer from "@/components/Footer";
+
+// This page pulls live data (project count, portfolio items, latest blog
+// posts) from the database via Hero/Projects/Blog. Without this, Next.js
+// statically renders the page once at build time and serves that same
+// frozen HTML forever — admin changes would never appear until the next
+// deployment.
 export const dynamic = "force-dynamic";
 
 export default function Home() {

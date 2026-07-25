@@ -6,6 +6,10 @@ export const metadata = {
   description: "Insights on web development, SEO, graphic design, and digital strategy from CYMAK Technologies.",
 };
 
+// Without this, Next.js would statically cache the post list at build
+// time and never show newly published/deleted posts until a redeploy.
+export const dynamic = "force-dynamic";
+
 const categoryColors: Record<string, string> = {
   "Web Development": "#146c43",
   "SEO Optimization": "#0d4c30",
