@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import DeleteProjectButton from "./DeleteProjectButton";
 
@@ -50,7 +51,7 @@ export default async function ProjectsListPage() {
               <tbody>
                 {items.map((p) => (
                   <tr key={p.id}>
-                    <td>{p.image && <img src={p.image} alt={p.title} className="adm-thumb" />}</td>
+                    <td>{p.image && <Image src={p.image} alt={p.title} width={48} height={48} className="adm-thumb" />}</td>
                     <td>
                       {p.title}
                       {p.featured && (

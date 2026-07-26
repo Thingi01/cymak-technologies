@@ -92,7 +92,7 @@ export default function ProjectForm({ initial }: { initial?: ProjectFormData }) 
       </div>
 
       <div className="adm-field">
-        <label className="adm-label">Type Label (e.g. "Full Website", "Event Flyer")</label>
+        <label className="adm-label">Type Label (e.g. &quot;Full Website&quot;, &quot;Event Flyer&quot;)</label>
         <input className="adm-input" value={form.type} onChange={(e) => update("type", e.target.value)} required />
       </div>
 
@@ -163,7 +163,7 @@ export default function ProjectForm({ initial }: { initial?: ProjectFormData }) 
             Feature in homepage hero
           </label>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: "0.76rem", color: "rgba(18,33,27,0.4)", marginTop: "0.35rem" }}>
-            Shows this project's screenshot in the browser-frame mockup on the homepage hero. If more than one project is marked, the most recently updated one wins.
+            Shows this project&apos;s screenshot in the browser-frame mockup on the homepage hero. If more than one project is marked, the most recently updated one wins.
           </p>
         </div>
       )}

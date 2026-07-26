@@ -39,6 +39,13 @@ export default function ImageUploadField({ value, onChange, folder = "projects" 
       <label className="adm-label">Image</label>
       {value && (
         <div style={{ marginBottom: "0.75rem" }}>
+          {/*
+            eslint-disable-next-line @next/next/no-img-element --
+            This preview intentionally shows the upload at its natural
+            aspect ratio (just capped at 220px wide). next/image needs a
+            fixed width/height or a fill parent with a locked ratio,
+            neither of which fits an arbitrary-shaped admin preview.
+          */}
           <img src={value} alt="Preview" style={{ maxWidth: 220, borderRadius: 8, display: "block" }} />
           <button
             type="button"
