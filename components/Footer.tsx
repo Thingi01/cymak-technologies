@@ -6,7 +6,7 @@ export default function Footer() {
       <style>{`
         .footer { border-top: 1px solid rgba(255,255,255,0.08); padding: 5rem 2rem 2rem; position: relative; overflow: hidden; background: #0f1a15; }
         .footer-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
-        .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
 
         .footer-logo { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; margin-bottom: 1rem; gap: 0; line-height: 1; }
         .f-logo-cymak {
@@ -47,8 +47,6 @@ export default function Footer() {
         }
         .footer-links li a:hover { color: #6bbf94; padding-left: 6px; }
 
-        .cs-item { font-family: 'Outfit', sans-serif; font-size: 0.875rem; color: rgba(255,255,255,0.28); font-weight: 400; display: flex; align-items: center; gap: 0.5rem; }
-        .cs-pill { font-size: 0.55rem; padding: 0.12rem 0.5rem; border-radius: 100px; border: 1px dashed rgba(217,185,120,0.35); color: rgba(217,185,120,0.75); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
 
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
         .footer-copy { font-family: 'Outfit', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,0.35); font-weight: 400; }
@@ -109,15 +107,6 @@ export default function Footer() {
                 <li><a href="/pricing">Pricing</a></li>
                 <li><a href="#blog">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
-              </ul>
-            </div>
-
-            {/* Coming Soon — not clickable */}
-            <div>
-              <div className="footer-col-title">Coming Soon</div>
-              <ul className="footer-links">
-                <li><span className="cs-item">Cloud Solutions <span className="cs-pill">Soon</span></span></li>
-                <li><span className="cs-item">Cybersecurity <span className="cs-pill">Soon</span></span></li>
               </ul>
             </div>
 

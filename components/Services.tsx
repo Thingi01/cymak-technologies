@@ -29,21 +29,6 @@ const activeServices = [
   },
 ];
 
-const futureServices = [
-  {
-    icon: "☁",
-    title: "Cloud Solutions",
-    desc: "Seamless cloud migration, management, and optimization to reduce costs and scale with confidence.",
-    color: "#b8892e",
-  },
-  {
-    icon: "🛡",
-    title: "Cybersecurity",
-    desc: "Comprehensive protection — risk assessments, system audits, and security frameworks to eliminate vulnerabilities.",
-    color: "#96701f",
-  },
-];
-
 export default function Services() {
   return (
     <>
@@ -93,40 +78,8 @@ export default function Services() {
         .sc-arrow { position: absolute; bottom: 2rem; right: 2rem; font-size: 1.1rem; color: transparent; transition: all 0.25s; transform: translateX(-4px); font-family: 'Outfit', sans-serif; }
         .service-card:hover .sc-arrow { color: var(--sc, #146c43); transform: translateX(0); }
 
-        /* Future services */
-        .future-wrap { margin-top: 4.5rem; }
-        .future-header { text-align: center; margin-bottom: 2rem; }
-        .future-badge {
-          display: inline-flex; align-items: center; gap: 0.5rem;
-          padding: 0.35rem 1rem; border-radius: 100px;
-          border: 1px dashed rgba(184,137,46,0.45); background: #f6edd8;
-          font-family: 'Outfit', sans-serif; font-size: 0.68rem; font-weight: 600;
-          letter-spacing: 0.14em; text-transform: uppercase; color: #96701f;
-        }
-        .future-title {
-          font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700;
-          color: rgba(18,33,27,0.55); margin-top: 0.75rem; font-style: italic;
-        }
-        .future-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .future-card {
-          padding: 2rem; border-radius: 12px;
-          border: 1px dashed rgba(184,137,46,0.30); background: rgba(255,255,255,0.6);
-          position: relative; overflow: hidden;
-          display: flex; align-items: flex-start; gap: 1.2rem;
-        }
-        .future-card::after {
-          content: 'Coming Soon'; position: absolute; top: 1rem; right: 1rem;
-          font-family: 'Outfit', sans-serif; font-size: 0.60rem; font-weight: 600;
-          letter-spacing: 0.12em; text-transform: uppercase; color: rgba(150,112,31,0.65);
-          border: 1px solid rgba(184,137,46,0.30); border-radius: 100px; padding: 0.18rem 0.6rem;
-        }
-        .future-icon { font-size: 1.3rem; flex-shrink: 0; opacity: 0.7; margin-top: 2px; }
-        .future-card-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: rgba(18,33,27,0.62); margin-bottom: 0.4rem; }
-        .future-card-desc { font-family: 'Outfit', sans-serif; font-size: 0.82rem; color: rgba(18,33,27,0.45); line-height: 1.7; font-weight: 400; }
-
         @media (max-width: 768px) {
           .services-grid { grid-template-columns: 1fr; }
-          .future-grid  { grid-template-columns: 1fr; }
           .service-card { padding: 2rem; }
         }
       `}</style>
@@ -153,31 +106,6 @@ export default function Services() {
                 <div className="sc-arrow">→</div>
               </div>
             ))}
-          </div>
-
-          {/* Future Services */}
-          <div className="future-wrap">
-            <div className="future-header" data-reveal>
-              <span className="future-badge">⏳ Expanding Soon</span>
-              <div className="future-title">Future Service Offerings</div>
-            </div>
-            <div className="future-grid">
-              {futureServices.map((s, i) => (
-                <div
-                  key={s.title}
-                  className="future-card"
-                  style={{ "--fc": s.color } as React.CSSProperties}
-                  data-reveal
-                  data-reveal-delay={i + 1}
-                >
-                  <span className="future-icon">{s.icon}</span>
-                  <div>
-                    <div className="future-card-title">{s.title}</div>
-                    <p className="future-card-desc">{s.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
