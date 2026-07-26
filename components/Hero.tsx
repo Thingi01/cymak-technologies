@@ -1,5 +1,5 @@
+import Image from "next/image";
 import { prisma } from "@/lib/prisma";
-import HeroProjectStack from "@/components/HeroProjectStack";
 
 async function getLiveProjectCount(): Promise<number> {
   try {
@@ -12,31 +12,60 @@ async function getLiveProjectCount(): Promise<number> {
   }
 }
 
-interface FeaturedProject {
-  id: string;
+interface ShowcaseProject {
   title: string;
   image: string;
+  link: string | null;
 }
 
-async function getFeaturedProjects(): Promise<FeaturedProject[]> {
+async function getShowcaseProject(): Promise<ShowcaseProject | null> {
   try {
-    const rows = await prisma.project.findMany({
-      where: { published: true, image: { not: null } },
-      orderBy: { order: "asc" },
-      take: 12,
-      select: { id: true, title: true, image: true },
+    // Prefer whatever's explicitly marked "Feature in homepage hero" in
+    // /admin/projects. Falls back to the first published website/landing
+    // page with an image, so the hero never looks broken if nothing's
+    // been marked yet.
+    const featured = await prisma.project.findFirst({
+      where: {
+        published: true,
+        featured: true,
+        image: { not: null },
+        category: { in: ["WEBSITE", "LANDING_PAGE"] },
+      },
+      orderBy: { updatedAt: "desc" },
+      select: { title: true, image: true, link: true },
     });
-    // image is guaranteed non-null by the where clause above.
-    return rows.map((r) => ({ id: r.id, title: r.title, image: r.image as string }));
+    if (featured) return { title: featured.title, image: featured.image as string, link: featured.link };
+
+    const fallback = await prisma.project.findFirst({
+      where: {
+        published: true,
+        image: { not: null },
+        category: { in: ["WEBSITE", "LANDING_PAGE"] },
+      },
+      orderBy: { order: "asc" },
+      select: { title: true, image: true, link: true },
+    });
+    if (fallback) return { title: fallback.title, image: fallback.image as string, link: fallback.link };
+
+    return null;
   } catch {
-    return [];
+    return null;
+  }
+}
+
+function displayHostname(link: string | null): string {
+  if (!link) return "your-project.com";
+  try {
+    return new URL(link).hostname;
+  } catch {
+    return link;
   }
 }
 
 export default async function Hero() {
-  const [liveProjectCount, featuredProjects] = await Promise.all([
+  const [liveProjectCount, showcase] = await Promise.all([
     getLiveProjectCount(),
-    getFeaturedProjects(),
+    getShowcaseProject(),
   ]);
 
   return (
@@ -44,8 +73,8 @@ export default async function Hero() {
       <style>{`
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: #ffffff; }
         .hero-inner {
-          position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 8rem 2rem 5rem;
-          display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;
+          position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 8rem 1.5rem 5rem;
+          display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center;
         }
         .hero-badge {
           display: inline-flex; align-items: center; gap: 0.5rem;
@@ -56,12 +85,12 @@ export default async function Hero() {
         }
         .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #146c43; }
         .hero-h1 {
-          font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5.5vw, 4.8rem); font-weight: 900;
+          font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5.5vw, 4.8rem); font-weight: 900;
           line-height: 1.04; letter-spacing: -0.02em; color: #12211b; margin-bottom: 1.5rem;
         }
         .hero-h1 .accent { color: #146c43; }
         .hero-sub {
-          font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 400; line-height: 1.8;
+          font-family: 'Outfit', sans-serif; font-size: clamp(0.95rem, 2vw, 1.05rem); font-weight: 400; line-height: 1.8;
           color: rgba(18,33,27,0.65); max-width: 480px; margin-bottom: 2.5rem;
         }
         .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -80,36 +109,36 @@ export default async function Hero() {
         }
         .h-btn-secondary:hover { border-color: #146c43; color: #146c43; background: #f5f8f6; }
         .hero-stats {
-          display: flex; gap: 2.5rem; margin-top: 3.5rem; padding-top: 2rem;
-          border-top: 1px solid rgba(18,33,27,0.10);
+          display: flex; gap: clamp(1.25rem, 4vw, 2.5rem); margin-top: 3.5rem; padding-top: 2rem;
+          border-top: 1px solid rgba(18,33,27,0.10); flex-wrap: wrap;
         }
         .stat-num {
-          font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 800; line-height: 1;
+          font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; line-height: 1;
           color: #146c43;
         }
-        .stat-label { font-family: 'Outfit', sans-serif; font-size: 0.72rem; color: rgba(18,33,27,0.45); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem; }
+        .stat-label { font-family: 'Outfit', sans-serif; font-size: 0.7rem; color: rgba(18,33,27,0.45); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.3rem; white-space: nowrap; }
 
-        /* Featured-work stack — real client screenshots, fanned like a deck */
-        .hero-visual { display: flex; align-items: center; justify-content: center; }
-        .stack-wrap { position: relative; width: 100%; max-width: 340px; height: 340px; }
-        .stack-card {
-          position: absolute; inset: 0; border-radius: 14px; overflow: hidden;
-          background: #f5f8f6; border: 1px solid rgba(18,33,27,0.10);
+        /* Featured-work browser-frame mockup */
+        .hero-visual { display: flex; align-items: center; justify-content: center; width: 100%; }
+        .frame-wrap { position: relative; width: 100%; max-width: 440px; }
+        .frame-card {
+          border-radius: 14px; overflow: hidden; background: #fff;
+          border: 1px solid rgba(18,33,27,0.12);
           box-shadow: 0 16px 40px rgba(18,33,27,0.10);
-          transition: transform 0.3s var(--ease-out, ease);
         }
-        .stack-card-0 { transform: rotate(-6deg) translate(-14px, 6px); z-index: 3; }
-        .stack-card-1 { transform: rotate(3deg) translate(10px, -8px); z-index: 2; }
-        .stack-card-2 { transform: rotate(9deg) translate(28px, -18px); z-index: 1; opacity: 0.9; }
-        .stack-card.stack-fading { opacity: 0; transition: opacity 0.35s ease; }
-        .stack-card:not(.stack-fading) { transition: opacity 0.35s ease, transform 0.3s var(--ease-out, ease); }
-        .stack-wrap:hover .stack-card-0 { transform: rotate(-3deg) translate(-18px, 2px); }
-        .stack-wrap:hover .stack-card-1 { transform: rotate(1deg) translate(14px, -12px); }
-        .stack-wrap:hover .stack-card-2 { transform: rotate(6deg) translate(34px, -24px); }
-        .stack-caption {
-          position: absolute; left: 50%; bottom: -3.2rem; transform: translateX(-50%);
-          width: max-content; max-width: 280px; text-align: center;
+        .frame-chrome {
+          display: flex; align-items: center; gap: 6px;
+          padding: 0.6rem 0.85rem; background: #f5f8f6; border-bottom: 1px solid rgba(18,33,27,0.08);
         }
+        .frame-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(18,33,27,0.14); flex-shrink: 0; }
+        .frame-url {
+          margin-left: 0.5rem; font-family: 'Outfit', sans-serif; font-size: 0.72rem; color: rgba(18,33,27,0.4);
+          background: #fff; border: 1px solid rgba(18,33,27,0.10); border-radius: 100px;
+          padding: 0.2rem 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          flex: 1; min-width: 0;
+        }
+        .frame-shot { position: relative; width: 100%; aspect-ratio: 16 / 10; background: #f5f8f6; }
+        .stack-caption { text-align: center; margin-top: 1rem; }
         .stack-caption-link {
           display: inline-flex; align-items: center; gap: 0.4rem;
           font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 600;
@@ -122,7 +151,7 @@ export default async function Hero() {
           color: #96701f; font-weight: 600; letter-spacing: 0.03em;
         }
 
-        /* Fallback trust panel if no project images exist yet */
+        /* Fallback trust panel if no showcase project exists yet */
         .trust-card {
           width: 100%; max-width: 360px; background: #ffffff; border: 1px solid rgba(18,33,27,0.10);
           border-radius: 16px; padding: 2.25rem; box-shadow: 0 12px 32px rgba(18,33,27,0.06);
@@ -156,7 +185,7 @@ export default async function Hero() {
 
         /* Scroll cue */
         .scroll-cue {
-          position: absolute; bottom: 1.75rem; left: 50%; transform: translateX(-50%);
+          position: absolute; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
           display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
           text-decoration: none; z-index: 2;
         }
@@ -178,14 +207,25 @@ export default async function Hero() {
           .scroll-cue-arrow { animation: none; }
         }
 
+        /* ── Responsive ── */
         @media (max-width: 900px) {
           .hero-inner { grid-template-columns: 1fr; text-align: center; padding-bottom: 6rem; }
           .hero-sub { margin: 0 auto 2.5rem; }
           .hero-actions { justify-content: center; }
           .hero-stats { justify-content: center; }
           .trust-card { text-align: left; }
-          .stack-wrap { margin-top: 2.5rem; }
-          .stack-caption { bottom: -3rem; }
+          .frame-wrap { max-width: 400px; margin: 0 auto; }
+        }
+        @media (max-width: 640px) {
+          .hero-inner { padding: 7rem 1.25rem 5.5rem; }
+          .frame-wrap { max-width: 320px; }
+          .frame-chrome { padding: 0.5rem 0.65rem; gap: 4px; }
+          .frame-dot { width: 6px; height: 6px; }
+          .frame-url { font-size: 0.64rem; padding: 0.15rem 0.6rem; }
+        }
+        @media (max-width: 400px) {
+          .hero-stats { gap: 1.1rem; }
+          .frame-wrap { max-width: 260px; }
         }
         @media (max-width: 480px) {
           .scroll-cue { display: none; }
@@ -214,8 +254,24 @@ export default async function Hero() {
           </div>
 
           <div className="hero-visual" data-reveal data-reveal-delay="2">
-            {featuredProjects.length >= 2 ? (
-              <HeroProjectStack projects={featuredProjects} />
+            {showcase ? (
+              <div className="frame-wrap">
+                <div className="frame-card">
+                  <div className="frame-chrome">
+                    <div className="frame-dot" />
+                    <div className="frame-dot" />
+                    <div className="frame-dot" />
+                    <div className="frame-url">{displayHostname(showcase.link)}</div>
+                  </div>
+                  <div className="frame-shot">
+                    <Image src={showcase.image} alt={showcase.title} fill sizes="(max-width: 640px) 320px, 440px" style={{ objectFit: "cover" }} />
+                  </div>
+                </div>
+                <div className="stack-caption">
+                  <a href="#projects" className="stack-caption-link">See all our work →</a>
+                  <div className="stack-caption-sub">Based in Nairobi, Kenya</div>
+                </div>
+              </div>
             ) : (
               <div className="trust-card">
                 <div className="trust-mark"><span>CYM</span></div>

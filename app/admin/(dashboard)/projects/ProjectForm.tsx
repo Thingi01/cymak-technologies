@@ -15,6 +15,7 @@ export interface ProjectFormData {
   link: string | null;
   order: number;
   published: boolean;
+  featured: boolean;
 }
 
 export default function ProjectForm({ initial }: { initial?: ProjectFormData }) {
@@ -32,6 +33,7 @@ export default function ProjectForm({ initial }: { initial?: ProjectFormData }) 
       link: "",
       order: 0,
       published: true,
+      featured: false,
     }
   );
   const [tagInput, setTagInput] = useState("");
@@ -153,6 +155,18 @@ export default function ProjectForm({ initial }: { initial?: ProjectFormData }) 
           Published (visible on the live site)
         </label>
       </div>
+
+      {form.category !== "DESIGN" && (
+        <div className="adm-field">
+          <label className="adm-checkbox-row">
+            <input type="checkbox" checked={form.featured} onChange={(e) => update("featured", e.target.checked)} />
+            Feature in homepage hero
+          </label>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: "0.76rem", color: "rgba(18,33,27,0.4)", marginTop: "0.35rem" }}>
+            Shows this project's screenshot in the browser-frame mockup on the homepage hero. If more than one project is marked, the most recently updated one wins.
+          </p>
+        </div>
+      )}
 
       <button type="submit" disabled={saving} className="adm-btn">
         {saving ? "Saving..." : isEdit ? "Save Changes" : "Create Project"}

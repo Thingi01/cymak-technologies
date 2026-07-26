@@ -51,7 +51,12 @@ export default async function ProjectsListPage() {
                 {items.map((p) => (
                   <tr key={p.id}>
                     <td>{p.image && <img src={p.image} alt={p.title} className="adm-thumb" />}</td>
-                    <td>{p.title}</td>
+                    <td>
+                      {p.title}
+                      {p.featured && (
+                        <span className="adm-badge adm-badge-new" style={{ marginLeft: "0.5rem" }}>Featured</span>
+                      )}
+                    </td>
                     <td>{p.type}</td>
                     <td>{p.order}</td>
                     <td>
