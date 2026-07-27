@@ -9,40 +9,28 @@ export const metadata: Metadata = {
 
 const services = [
   {
-    icon: "☁",
-    title: "Cloud Migration & Infrastructure Solutions",
-    desc: "Secure transition of on-premise systems to cloud environments with minimal disruption and optimized performance.",
-    color: "#146c43",
-  },
-  {
-    icon: "⚙",
-    title: "IT Support & Systems Administration",
-    desc: "Proactive monitoring, maintenance, and management of enterprise IT environments.",
-    color: "#1d8a56",
-  },
-  {
     icon: "⬡",
-    title: "Web & Application Development",
-    desc: "Development of secure, scalable, and performance-driven digital platforms.",
-    color: "#0d4c30",
-  },
-  {
-    icon: "🛡",
-    title: "Cybersecurity & Risk Management",
-    desc: "Implementation of robust security frameworks to safeguard critical business assets.",
-    color: "#96701f",
-  },
-  {
-    icon: "◈",
-    title: "Network Design & Implementation",
-    desc: "Structured, secure, and scalable network infrastructure solutions.",
+    title: "Web Development",
+    desc: "Modern, responsive, and secure websites engineered for performance. From corporate sites to complex web applications built to convert and scale.",
     color: "#146c43",
   },
   {
     icon: "✦",
-    title: "IT Strategy & Consulting",
-    desc: "Advisory services to align technology investments with business objectives.",
+    title: "SEO Optimization",
+    desc: "Data-driven search strategies that improve visibility, drive qualified organic traffic, and position your business ahead of competitors on Google.",
+    color: "#0d4c30",
+  },
+  {
+    icon: "◈",
+    title: "Graphic Design",
+    desc: "Professional brand assets, social media graphics, posters, flyers, and digital design that strengthen your identity and communicate your value clearly.",
     color: "#96701f",
+  },
+  {
+    icon: "⟡",
+    title: "Systems & Infrastructure",
+    desc: "End-to-end IT infrastructure design — server configuration, network setup, and system integration for operational stability and business growth.",
+    color: "#1d8a56",
   },
 ];
 
@@ -121,7 +109,7 @@ export default function AboutPage() {
         .ab-section-title { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 800; color: #12211b; letter-spacing: -0.02em; white-space: nowrap; }
 
         /* Services grid */
-        .ab-services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid rgba(18,33,27,0.10); border-radius: 16px; overflow: hidden; background: rgba(18,33,27,0.10); }
+        .ab-services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; border: 1px solid rgba(18,33,27,0.10); border-radius: 16px; overflow: hidden; background: rgba(18,33,27,0.10); }
         .ab-service-card { padding: 2rem; background: #ffffff; transition: background 0.25s; position: relative; overflow: hidden; }
         .ab-service-card:hover { background: #fbfdfc; }
         .ab-service-icon { font-size: 1.4rem; margin-bottom: 1rem; display: block; color: var(--sc, #146c43); }
@@ -156,7 +144,6 @@ export default function AboutPage() {
 
         @media (max-width: 900px) {
           .ab-hero { grid-template-columns: 1fr; gap: 3rem; }
-          .ab-services-grid { grid-template-columns: 1fr 1fr; }
           .ab-method-grid { grid-template-columns: 1fr; }
           .ab-commit-wrap { grid-template-columns: 1fr; }
         }

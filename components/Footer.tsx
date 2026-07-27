@@ -52,6 +52,10 @@ export default function Footer() {
         .footer-copy { font-family: 'Outfit', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,0.35); font-weight: 400; }
         .footer-copy span { color: rgba(107,191,148,0.85); font-weight: 500; }
         .footer-badge { font-family: 'Outfit', sans-serif; font-size: 0.66rem; color: rgba(255,255,255,0.28); letter-spacing: 0.1em; text-transform: uppercase; }
+        .footer-legal-links { display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif; font-size: 0.78rem; }
+        .footer-legal-links a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+        .footer-legal-links a:hover { color: #6bbf94; }
+        .footer-legal-sep { color: rgba(255,255,255,0.2); }
 
         @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; } }
         @media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
@@ -82,7 +86,7 @@ export default function Footer() {
               </div>
               <div className="footer-socials">
                 <a href="https://www.tiktok.com/@cymakit" target="_blank" rel="noopener noreferrer" className="f-social" title="TikTok @cymakit">
-                  🎵
+                  🎵 Titktok
                 </a>
               </div>
             </div>
@@ -114,6 +118,11 @@ export default function Footer() {
 
           <div className="footer-bottom">
             <div className="footer-copy">© {year} <span>CYMAK Technologies</span>. All rights reserved.</div>
+            <div className="footer-legal-links">
+              <a href="/privacy">Privacy Policy</a>
+              <span className="footer-legal-sep">·</span>
+              <a href="/terms">Terms of Service</a>
+            </div>
             <div className="footer-badge">Secure · Scalable · Future-Ready</div>
           </div>
         </div>

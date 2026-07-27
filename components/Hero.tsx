@@ -72,6 +72,14 @@ export default async function Hero() {
     <>
       <style>{`
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: #ffffff; }
+        .hero::before {
+          content: '';
+          position: absolute; inset: 0; z-index: 1;
+          background-image: radial-gradient(rgba(18,33,27,0.09) 1px, transparent 1px);
+          background-size: 26px 26px;
+          mask-image: radial-gradient(ellipse 65% 55% at 72% 40%, black 0%, transparent 72%);
+          -webkit-mask-image: radial-gradient(ellipse 65% 55% at 72% 40%, black 0%, transparent 72%);
+        }
         .hero-inner {
           position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 8rem 1.5rem 5rem;
           display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center;

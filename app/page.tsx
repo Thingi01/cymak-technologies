@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
+import TrustBar from "@/components/TrustBar";
 import Services from "@/components/Services";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
@@ -19,7 +20,7 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
-      
+      <TrustBar />
       <Services />
       <Projects />
       <About />
