@@ -86,7 +86,7 @@ export default function Footer() {
               </div>
               <div className="footer-socials">
                 <a href="https://www.tiktok.com/@cymakit" target="_blank" rel="noopener noreferrer" className="f-social" title="TikTok @cymakit">
-                  🎵 Titktok
+                  🎵
                 </a>
               </div>
             </div>
