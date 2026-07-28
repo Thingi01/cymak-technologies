@@ -168,3 +168,125 @@
   padding: 0.25rem 0.6rem; border-radius: 100px; margin: 0.2rem 0.3rem 0.2rem 0;
 }
 .adm-tag-chip button { background: none; border: none; color: inherit; cursor: pointer; font-size: 0.8rem; line-height: 1; }
+
+/* ============================================================
+   SHELL / SIDEBAR LAYOUT
+   ============================================================ */
+.adm-shell {
+  min-height: 100vh;
+  display: flex;
+  background: #f5f8f6;
+}
+.adm-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(18, 33, 27, 0.10);
+  background: #ffffff;
+  padding: 1.5rem 1rem;
+}
+.adm-sidebar-logo {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  color: #146c43;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  padding: 0 0.5rem;
+}
+.adm-sidebar-user {
+  font-family: "Outfit", sans-serif;
+  font-size: 0.72rem;
+  color: rgba(18, 33, 27, 0.45);
+  margin-bottom: 1.8rem;
+  padding: 0 0.5rem;
+}
+.adm-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.adm-nav-link {
+  font-family: "Outfit", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(18, 33, 27, 0.65);
+  text-decoration: none;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  display: block;
+}
+.adm-nav-link:hover { background: #f5f8f6; color: #146c43; }
+.adm-sidebar-foot {
+  margin-top: 2rem;
+  padding: 0 0.5rem;
+}
+.adm-sidebar-back {
+  display: block;
+  margin-top: 1.5rem;
+  padding: 0 0.5rem;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.78rem;
+  color: rgba(18, 33, 27, 0.4);
+  text-decoration: none;
+}
+.adm-main {
+  flex: 1;
+  min-width: 0; /* prevents flex children (tables etc) from forcing the column wider than the viewport */
+  padding: 2rem 2.5rem;
+}
+
+/* ============================================================
+   TABLE OVERFLOW SAFETY NET
+   Wrap any <table className="adm-table"> in <div className="adm-table-wrap">
+   so wide tables scroll horizontally instead of breaking page layout.
+   ============================================================ */
+.adm-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================================
+   FORM ROW (side-by-side fields that stack on mobile)
+   ============================================================ */
+.adm-form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .adm-shell { flex-direction: column; }
+  .adm-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(18, 33, 27, 0.10);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+  .adm-sidebar-logo, .adm-sidebar-user { margin-bottom: 0; padding: 0; }
+  .adm-sidebar-user { order: 3; width: 100%; }
+  .adm-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    order: 2;
+  }
+  .adm-nav-link { padding: 0.4rem 0.6rem; font-size: 0.82rem; }
+  .adm-sidebar-foot { margin-top: 0; padding: 0; order: 4; }
+  .adm-sidebar-back { display: none; } /* redundant on mobile — nav already fits on screen */
+  .adm-main { padding: 1.5rem 1.1rem; }
+
+  .adm-h1 { font-size: 1.4rem; }
+  .adm-stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .adm-form-row-2 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 420px) {
+  .adm-stat-grid { grid-template-columns: 1fr; }
+}
