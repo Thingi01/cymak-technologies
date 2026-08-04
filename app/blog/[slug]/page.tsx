@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { getPostBySlug } from "@/lib/posts";
 
 export const dynamic = "force-dynamic";
@@ -30,27 +31,23 @@ function parseInline(text: string): React.ReactNode[] {
     const codeMatch = remaining.match(/^(.*?)`(.+?)`/);
     const linkMatch = remaining.match(/^(.*?)\[([^\]]+)\]\(([^)]+)\)/);
 
-    type InlineMatch = {
-      type: "bold" | "italic" | "code" | "link";
-      match: RegExpMatchArray;
-    };
+    type InlineMatch = { type: "bold" | "italic" | "code" | "link"; match: RegExpMatchArray };
 
-    const matches = [
-      boldMatch && { type: "bold", match: boldMatch },
-      italicMatch && { type: "italic", match: italicMatch },
-      codeMatch && { type: "code", match: codeMatch },
-      linkMatch && { type: "link", match: linkMatch },
-    ]
-      .filter((value): value is InlineMatch => Boolean(value))
-      .sort((a, b) => a.match[1].length - b.match[1].length);
+    const matches: InlineMatch[] = (
+      [
+        boldMatch && { type: "bold" as const, match: boldMatch },
+        italicMatch && { type: "italic" as const, match: italicMatch },
+        codeMatch && { type: "code" as const, match: codeMatch },
+        linkMatch && { type: "link" as const, match: linkMatch },
+      ].filter(Boolean) as InlineMatch[]
+    ).sort((a, b) => a.match[1].length - b.match[1].length);
 
     if (matches.length === 0) {
       result.push(<span key={keyIdx++}>{remaining}</span>);
       break;
     }
 
-    const first = matches[0]!;
-    const { type, match } = first;
+    const { type, match } = matches[0];
 
     if (match[1]) result.push(<span key={keyIdx++}>{match[1]}</span>);
 
@@ -179,6 +176,7 @@ export default async function BlogPost({
           color: rgba(18,33,27,0.45); font-weight: 400;
         }
         .post-meta-sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(18,33,27,0.25); flex-shrink: 0; }
+        .post-featured-img { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 14px; overflow: hidden; margin: -1rem 0 3rem; background: #eef4f0; border: 1px solid rgba(18,33,27,0.08); }
 
         .prose-h1 { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 800; color: #12211b; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; line-height: 1.15; }
         .prose-h2 { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 800; color: #12211b; margin: 2.5rem 0 0.85rem; letter-spacing: -0.02em; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(18,33,27,0.10); line-height: 1.2; }
@@ -217,6 +215,12 @@ export default async function BlogPost({
             <span className="post-meta-sep" />
             <span className="post-meta-item">✍ {post.author}</span>
           </div>
+
+          {post.coverImage && (
+            <div className="post-featured-img">
+              <Image src={post.coverImage} alt={post.title} fill sizes="740px" style={{ objectFit: "cover" }} priority />
+            </div>
+          )}
 
           <RenderContent content={post.content} />
 

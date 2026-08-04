@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
 
 export default async function Blog() {
@@ -35,6 +36,7 @@ export default async function Blog() {
         }
         .blog-card:hover::after { opacity: 1; }
 
+        .bc-thumb { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; margin-bottom: 1.2rem; background: #eef4f0; }
         .bc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
         .bc-cat {
           font-family: 'Outfit', sans-serif; font-size: 0.64rem; letter-spacing: 0.12em;
@@ -80,6 +82,11 @@ export default async function Blog() {
             ) : (
               posts.map((post, i) => (
                 <Link key={post.slug} href={`/blog/${post.slug}`} className="blog-card" data-reveal data-reveal-delay={i + 1}>
+                  {post.coverImage && (
+                    <div className="bc-thumb">
+                      <Image src={post.coverImage} alt={post.title} fill sizes="(max-width: 580px) 100vw, 33vw" style={{ objectFit: "cover" }} />
+                    </div>
+                  )}
                   <div className="bc-top">
                     <span className="bc-cat">{post.category}</span>
                     <span className="bc-date">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
 
 export const metadata = {
@@ -51,6 +52,7 @@ export default async function BlogPage() {
         }
         .bp-card:hover::after { opacity: 1; }
 
+        .bp-thumb { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; margin-bottom: 1.2rem; background: #eef4f0; }
         .bp-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
         .bp-cat {
           font-family: 'Outfit', sans-serif; font-size: 0.64rem; letter-spacing: 0.12em;
@@ -101,6 +103,11 @@ export default async function BlogPage() {
                   data-reveal-delay={Math.min(i + 1, 6)}
                   style={{ "--cc": categoryColors[post.category] || "#146c43" } as React.CSSProperties}
                 >
+                  {post.coverImage && (
+                    <div className="bp-thumb">
+                      <Image src={post.coverImage} alt={post.title} fill sizes="(max-width: 900px) 100vw, 33vw" style={{ objectFit: "cover" }} />
+                    </div>
+                  )}
                   <div className="bp-card-top">
                     <span className="bp-cat">{post.category}</span>
                     <span className="bp-date">{new Date(post.date).toLocaleDateString("en-KE", { month: "short", year: "numeric" })}</span>
