@@ -1,5 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -40,15 +42,8 @@ export default function Navbar() {
         }
 
         /* Logo */
-        .nav-logo { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; gap: 0; line-height: 1; }
-        .logo-cymak {
-          font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 900;
-          color: #146c43;
-        }
-        .logo-tech {
-          font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 500;
-          color: rgba(18,33,27,0.42); letter-spacing: 0.18em; text-transform: uppercase; line-height: 1;
-        }
+        .nav-logo { display: flex; align-items: center; text-decoration: none; }
+        .nav-logo img { height: 34px; width: auto; display: block; }
 
         /* Desktop links */
         .nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
@@ -169,14 +164,19 @@ export default function Navbar() {
 
       <nav className={`nav-root${scrolled ? " scrolled" : ""}`}>
         <div className="nav-inner">
-          <a href="#" className="nav-logo">
-            <span className="logo-cymak">CYMAK</span>
-            <span className="logo-tech">Technologies</span>
-          </a>
+          <Link href="/" className="nav-logo">
+            <Image src="/images/logo.png" alt="CYMAK Technologies" width={136} height={42} priority />
+          </Link>
 
           <ul className="nav-links">
             {links.map(l => (
-              <li key={l}><a href={l === "Pricing" ? "/pricing" : `#${l.toLowerCase()}`}>{l}</a></li>
+              <li key={l}>
+                {l === "Pricing" ? (
+                  <Link href="/pricing">{l}</Link>
+                ) : (
+                  <a href={`/#${l.toLowerCase()}`}>{l}</a>
+                )}
+              </li>
             ))}
           </ul>
 
@@ -197,17 +197,24 @@ export default function Navbar() {
 
       {/* Mobile dropdown menu */}
       <div className={`mobile-menu${menuOpen ? " open" : ""}`}>
-        {links.map(l => (
-          <a
-            key={l}
-            href={l === "Pricing" ? "/pricing" : `#${l.toLowerCase()}`}
-            className="m-link"
-            onClick={() => setMenuOpen(false)}
-          >
-            {l}
-            <span className="m-arrow">→</span>
-          </a>
-        ))}
+        {links.map(l =>
+          l === "Pricing" ? (
+            <Link key={l} href="/pricing" className="m-link" onClick={() => setMenuOpen(false)}>
+              {l}
+              <span className="m-arrow">→</span>
+            </Link>
+          ) : (
+            <a
+              key={l}
+              href={`/#${l.toLowerCase()}`}
+              className="m-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              {l}
+              <span className="m-arrow">→</span>
+            </a>
+          )
+        )}
         <a href="#contact" className="m-cta" onClick={() => setMenuOpen(false)}>
           Get in Touch
         </a>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -106,9 +108,9 @@ export default function Footer() {
             <div>
               <div className="footer-col-title">Company</div>
               <ul className="footer-links">
-                <li><a href="/about">About Us</a></li>
+                <li><Link href="/about">About Us</Link></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="/pricing">Pricing</a></li>
+                <li><Link href="/pricing">Pricing</Link></li>
                 <li><a href="#blog">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
               </ul>
@@ -119,9 +121,9 @@ export default function Footer() {
           <div className="footer-bottom">
             <div className="footer-copy">© {year} <span>CYMAK Technologies</span>. All rights reserved.</div>
             <div className="footer-legal-links">
-              <a href="/privacy">Privacy Policy</a>
+              <Link href="/privacy">Privacy Policy</Link>
               <span className="footer-legal-sep">·</span>
-              <a href="/terms">Terms of Service</a>
+              <Link href="/terms">Terms of Service</Link>
             </div>
             <div className="footer-badge">Secure · Scalable · Future-Ready</div>
           </div>
