@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Blog — CYMAK Technologies",
@@ -79,6 +81,7 @@ export default async function BlogPage() {
         @media (max-width: 600px) { .bp-grid { grid-template-columns: 1fr; } }
       `}</style>
 
+      <Navbar />
       <div className="blog-page">
         <div className="blog-page-inner">
           <div className="bp-header" data-reveal>
@@ -124,6 +127,7 @@ export default async function BlogPage() {
           )}
         </div>
       </div>
+      <Footer />
     </>
   );
 }

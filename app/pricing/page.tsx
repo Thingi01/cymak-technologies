@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Pricing — CYMAK Technologies",
@@ -312,6 +314,7 @@ export default function PricingPage() {
         @media (max-width: 600px) { .pr-bottom { flex-direction: column; text-align: center; } .pr-bottom-btn { width: 100%; justify-content: center; } }
       `}</style>
 
+      <Navbar />
       <div className="pricing-page">
         <div className="pricing-inner">
 
@@ -370,6 +373,7 @@ export default function PricingPage() {
 
         </div>
       </div>
+      <Footer />
     </>
   );
 }

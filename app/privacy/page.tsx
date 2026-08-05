@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Privacy Policy — CYMAK Technologies",
@@ -25,6 +27,7 @@ export default function PrivacyPage() {
         .legal-a { color: #146c43; text-decoration: underline; text-underline-offset: 2px; }
       `}</style>
 
+      <Navbar />
       <div className="legal-page">
         <div className="legal-inner">
           <Link href="/" className="legal-back">← Back to home</Link>
@@ -101,6 +104,7 @@ export default function PrivacyPage() {
           </p>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "About Us — CYMAK Technologies",
@@ -152,6 +154,7 @@ export default function AboutPage() {
         }
       `}</style>
 
+      <Navbar />
       <div className="about-page">
         <div className="about-inner">
 
@@ -254,6 +257,7 @@ export default function AboutPage() {
 
         </div>
       </div>
+      <Footer />
     </>
   );
 }

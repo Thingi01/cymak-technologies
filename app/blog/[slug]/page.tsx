@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { getPostBySlug } from "@/lib/posts";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const dynamic = "force-dynamic";
 
@@ -201,6 +203,7 @@ export default async function BlogPost({
         .post-cta-btn:hover { background: #1d8a56; }
       `}</style>
 
+      <Navbar />
       <div className="post-page">
         <div className="post-inner">
           <Link href="/blog" className="post-back">← Back to Blog</Link>
@@ -233,6 +236,7 @@ export default async function BlogPost({
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
