@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -69,10 +70,10 @@ export default function Footer() {
 
             {/* Brand */}
             <div>
-              <a href="#home" className="footer-logo">
+              <Link href="/#home" className="footer-logo">
                 <span className="f-logo-cymak">CYMAK</span>
                 <span className="f-logo-tech">Technologies</span>
-              </a>
+              </Link>
               <p className="footer-tagline">
                 Building secure, scalable, and future-ready digital foundations for businesses that demand excellence.
               </p>
@@ -97,10 +98,10 @@ export default function Footer() {
             <div>
               <div className="footer-col-title">Services</div>
               <ul className="footer-links">
-                <li><a href="#services">Web Development</a></li>
-                <li><a href="#services">SEO Optimization</a></li>
-                <li><a href="#services">Graphic Design</a></li>
-                <li><a href="#services">Systems & Infrastructure</a></li>
+                <li><Link href="/#services">Web Development</Link></li>
+                <li><Link href="/#services">SEO Optimization</Link></li>
+                <li><Link href="/#services">Graphic Design</Link></li>
+                <li><Link href="/#services">Systems & Infrastructure</Link></li>
               </ul>
             </div>
 
@@ -109,10 +110,10 @@ export default function Footer() {
               <div className="footer-col-title">Company</div>
               <ul className="footer-links">
                 <li><Link href="/about">About Us</Link></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><Link href="/#projects">Projects</Link></li>
                 <li><Link href="/pricing">Pricing</Link></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><Link href="/#blog">Blog</Link></li>
+                <li><Link href="/#contact">Contact</Link></li>
               </ul>
             </div>
 

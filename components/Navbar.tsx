@@ -180,7 +180,7 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <a href="#contact" className="nav-cta">Get in Touch</a>
+          <Link href="/#contact" className="nav-cta">Get in Touch</Link>
 
           <button
             className="hamburger"
@@ -215,9 +215,9 @@ export default function Navbar() {
             </a>
           )
         )}
-        <a href="#contact" className="m-cta" onClick={() => setMenuOpen(false)}>
+        <Link href="/#contact" className="m-cta" onClick={() => setMenuOpen(false)}>
           Get in Touch
-        </a>
+        </Link>
       </div>
     </>
   );
