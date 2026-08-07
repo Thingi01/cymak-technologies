@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
 
   const file = formData.get("file");
   const folderRaw = formData.get("folder");
-  const folder = folderRaw === "blog" ? "blog" : "projects";
+ const folder = folderRaw === "blog" ? "blog" : folderRaw === "testimonials" ? "testimonials" : "projects";
 
   if (!(file instanceof File)) {
     return NextResponse.json({ error: "Missing file field" }, { status: 400 });

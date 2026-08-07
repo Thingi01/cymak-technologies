@@ -16,6 +16,7 @@ export interface ProjectFormData {
   order: number;
   published: boolean;
   featured: boolean;
+  logo: string | null;
 }
 
 export default function ProjectForm({ initial }: { initial?: ProjectFormData }) {
@@ -34,6 +35,7 @@ export default function ProjectForm({ initial }: { initial?: ProjectFormData }) 
       order: 0,
       published: true,
       featured: false,
+      logo: null,
     }
   );
   const [tagInput, setTagInput] = useState("");
@@ -138,7 +140,11 @@ export default function ProjectForm({ initial }: { initial?: ProjectFormData }) 
       )}
 
       <ImageUploadField value={form.image} onChange={(url) => update("image", url)} folder="projects" />
-
+ <ImageUploadField
+    value={form.logo}
+    onChange={(url) => update("logo", url)}
+    folder="projects"
+  />
       <div className="adm-field">
         <label className="adm-label">Display Order (lower shows first)</label>
         <input

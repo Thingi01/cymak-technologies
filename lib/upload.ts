@@ -19,7 +19,7 @@ export interface UploadResult {
 export async function processAndUploadImage(
   buffer: Buffer,
   originalName: string,
-  folder: "blog" | "projects" = "projects"
+  folder: "blog" | "projects" | "testimonials" = "projects"
 ): Promise<UploadResult> {
   const image = sharp(buffer).rotate(); // auto-orient based on EXIF
 

@@ -5,7 +5,7 @@ import { useState } from "react";
 interface Props {
   value: string | null;
   onChange: (url: string | null) => void;
-  folder?: "blog" | "projects";
+  folder?: "blog" | "projects" | "testimonials";
 }
 
 export default function ImageUploadField({ value, onChange, folder = "projects" }: Props) {

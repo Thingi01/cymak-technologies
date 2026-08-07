@@ -67,6 +67,7 @@ model Project {
   featured    Boolean         @default(false) // shown in the homepage hero showcase
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
+  logo        String? // optional client logo — shown in the homepage trust bar
 
   @@map("projects")
   @@index([published, category, order])
@@ -90,4 +91,20 @@ model ContactSubmission {
 
   @@map("contact_submissions")
   @@index([status, createdAt])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  clientName String
+  role      String?  // e.g. "Owner", "Managing Director" — optional
+  company   String
+  quote     String
+  photo     String?  // optional headshot or company logo — Vercel Blob URL
+  published Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("testimonials")
+  @@index([published, order])
 }

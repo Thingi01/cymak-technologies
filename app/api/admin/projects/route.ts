@@ -12,8 +12,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => null);
   if (!body) return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
 
-  const { category, type, title, description, tags, image, link, order, published, featured } = body;
-
+  const { category, type, title, description, tags, image, link, order, published, featured, logo } = body;
   if (!category || !VALID_CATEGORIES.includes(category) || !type || !title) {
     return NextResponse.json(
       { error: `category (one of ${VALID_CATEGORIES.join(", ")}), type, and title are required` },
@@ -33,6 +32,7 @@ export async function POST(request: NextRequest) {
       order: typeof order === "number" ? order : 0,
       published: published === undefined ? true : Boolean(published),
       featured: Boolean(featured),
+      logo: logo || null,
     },
   });
 

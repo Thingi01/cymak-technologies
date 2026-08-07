@@ -7,6 +7,7 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Footer from "@/components/Footer";
+import Testimonials from "@/components/Testimonials";
 
 // This page pulls live data (project count, portfolio items, latest blog
 // posts) from the database via Hero/Projects/Blog. Without this, Next.js
@@ -25,6 +26,7 @@ export default function Home() {
       <Projects />
       <About />
       <Contact />
+      <Testimonials />
       <Blog />
       <Footer />
     </main>
