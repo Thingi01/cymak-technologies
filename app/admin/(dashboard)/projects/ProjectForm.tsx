@@ -139,12 +139,21 @@ export default function ProjectForm({ initial }: { initial?: ProjectFormData }) 
         </div>
       )}
 
-      <ImageUploadField value={form.image} onChange={(url) => update("image", url)} folder="projects" />
- <ImageUploadField
-    value={form.logo}
-    onChange={(url) => update("logo", url)}
-    folder="projects"
-  />
+      <div className="adm-field">
+  <p className="adm-label" style={{ marginBottom: "0.5rem" }}>Project Screenshot</p>
+  <ImageUploadField value={form.image} onChange={(url) => update("image", url)} folder="projects" />
+</div>
+
+{form.category !== "DESIGN" && (
+  <div className="adm-field">
+    <p className="adm-label" style={{ marginBottom: "0.5rem" }}>Client Logo (optional, for homepage trust bar)</p>
+    <ImageUploadField
+      value={form.logo}
+      onChange={(url) => update("logo", url)}
+      folder="projects"
+    />
+  </div>
+)}
       <div className="adm-field">
         <label className="adm-label">Display Order (lower shows first)</label>
         <input
