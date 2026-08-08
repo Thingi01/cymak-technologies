@@ -3,17 +3,22 @@ import { prisma } from "@/lib/prisma";
 
 interface TrustEntry {
   title: string;
-  logo: string | null;
+  logo: string;
 }
 
 async function getClients(): Promise<TrustEntry[]> {
   try {
     const rows = await prisma.project.findMany({
-      where: { published: true, category: { in: ["WEBSITE", "LANDING_PAGE"] } },
+      where: {
+        published: true,
+        category: { in: ["WEBSITE", "LANDING_PAGE"] },
+        logo: { not: null },
+      },
       orderBy: { order: "asc" },
       select: { title: true, logo: true },
     });
-    return rows;
+    // logo is guaranteed non-null by the where clause above.
+    return rows.map((r) => ({ title: r.title, logo: r.logo as string }));
   } catch {
     return [];
   }
@@ -32,12 +37,12 @@ export default async function TrustBar() {
   return (
     <>
       <style>{`
-        .trustbar { padding: 2.25rem 0; border-top: 1px solid rgba(18,33,27,0.08); border-bottom: 1px solid rgba(18,33,27,0.08); background: #f5f8f6; overflow: hidden; }
+        .trustbar { padding: 2.5rem 0; border-top: 1px solid rgba(18,33,27,0.08); border-bottom: 1px solid rgba(18,33,27,0.08); background: #f5f8f6; overflow: hidden; }
         .trustbar-label {
           text-align: center;
           font-family: 'Outfit', sans-serif; font-size: 0.68rem; font-weight: 600;
           letter-spacing: 0.18em; text-transform: uppercase; color: rgba(18,33,27,0.4);
-          margin-bottom: 1.1rem;
+          margin-bottom: 1.5rem;
         }
         .trustbar-track-wrap {
           overflow: hidden;
@@ -49,13 +54,11 @@ export default async function TrustBar() {
           animation: trustbarScroll 32s linear infinite;
         }
         .trustbar-track:hover { animation-play-state: paused; }
-        .trustbar-item { display: flex; align-items: center; padding: 0 1.5rem; }
-        .trustbar-name {
-          font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600;
-          color: #96701f; white-space: nowrap;
+        .trustbar-item {
+          display: flex; align-items: center; justify-content: center;
+          padding: 0 2.25rem; height: 64px;
         }
-        .trustbar-logo { height: 30px; width: auto; object-fit: contain; opacity: 0.85; }
-        .trustbar-sep { color: rgba(150,112,31,0.35); font-size: 0.8rem; margin-left: 1.5rem; }
+        .trustbar-logo { max-height: 64px; max-width: 160px; width: auto; height: auto; object-fit: contain; }
 
         @keyframes trustbarScroll {
           from { transform: translateX(0); }
@@ -72,16 +75,9 @@ export default async function TrustBar() {
         <div className="trustbar-track-wrap">
           <div className="trustbar-track">
             {track.map((client, i) => (
-              <span key={`${client.title}-${i}`} style={{ display: "flex", alignItems: "center" }}>
-                <span className="trustbar-item">
-                  {client.logo ? (
-                    <Image src={client.logo} alt={client.title} width={120} height={30} className="trustbar-logo" />
-                  ) : (
-                    <span className="trustbar-name">{client.title}</span>
-                  )}
-                </span>
-                <span className="trustbar-sep">·</span>
-              </span>
+              <div key={`${client.title}-${i}`} className="trustbar-item">
+                <Image src={client.logo} alt={client.title} width={160} height={64} className="trustbar-logo" />
+              </div>
             ))}
           </div>
         </div>
