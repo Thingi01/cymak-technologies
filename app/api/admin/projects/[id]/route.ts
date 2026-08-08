@@ -19,7 +19,7 @@ export async function PUT(request: NextRequest, { params }: Params) {
   const existing = await prisma.project.findUnique({ where: { id } });
   if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  const { category, type, title, description, tags, image, link, order, published, featured } = body;
+  const { category, type, title, description, tags, image, link, order, published, featured, logo } = body;
 
   const project = await prisma.project.update({
     where: { id },
@@ -34,6 +34,7 @@ export async function PUT(request: NextRequest, { params }: Params) {
       order: typeof order === "number" ? order : existing.order,
       published: published ?? existing.published,
       featured: featured === undefined ? existing.featured : Boolean(featured),
+      logo: logo === undefined ? existing.logo : logo,
     },
   });
 

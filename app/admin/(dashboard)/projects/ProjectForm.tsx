@@ -147,11 +147,7 @@ export default function ProjectForm({ initial }: { initial?: ProjectFormData }) 
 {form.category !== "DESIGN" && (
   <div className="adm-field">
     <p className="adm-label" style={{ marginBottom: "0.5rem" }}>Client Logo (optional, for homepage trust bar)</p>
-    <ImageUploadField
-      value={form.logo}
-      onChange={(url) => update("logo", url)}
-      folder="projects"
-    />
+    <ImageUploadField value={form.logo} onChange={(url) => update("logo", url)} folder="projects" />
   </div>
 )}
       <div className="adm-field">
