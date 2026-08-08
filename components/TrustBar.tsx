@@ -29,10 +29,16 @@ export default async function TrustBar() {
 
   if (clients.length === 0) return null;
 
-  // Duplicate the list so the marquee loops seamlessly — when the first
-  // copy scrolls fully offscreen, the second copy is already in the exact
-  // same visual position, so the loop point is invisible.
-  const track = [...clients, ...clients];
+  // The seamless-loop trick (animate 0 -> -100/repeats%) only looks
+  // continuous if the track is comfortably wider than the viewport. With
+  // few logos, a single duplication isn't enough on wide screens — you'd
+  // see the whole "loop" at once. So we scale how many times the list
+  // repeats based on how few items there are, aiming for at least ~16
+  // items in the track regardless of how many real logos exist.
+  const MIN_TRACK_ITEMS = 16;
+  const repeats = Math.max(2, Math.ceil(MIN_TRACK_ITEMS / clients.length));
+  const track = Array.from({ length: repeats }, () => clients).flat();
+  const loopPercent = 100 / repeats;
 
   return (
     <>
@@ -51,7 +57,7 @@ export default async function TrustBar() {
         }
         .trustbar-track {
           display: flex; align-items: center; width: max-content;
-          animation: trustbarScroll 32s linear infinite;
+          animation: trustbarScroll ${Math.max(20, repeats * 10)}s linear infinite;
         }
         .trustbar-track:hover { animation-play-state: paused; }
         .trustbar-item {
@@ -62,7 +68,7 @@ export default async function TrustBar() {
 
         @keyframes trustbarScroll {
           from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          to   { transform: translateX(-${loopPercent}%); }
         }
 
         @media (prefers-reduced-motion: reduce) {
